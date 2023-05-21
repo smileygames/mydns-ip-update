@@ -53,6 +53,11 @@ ExecStart=/usr/bin/mydns-ip-update.sh
 WantedBy=network-online.target
 ```
 
+### 基本サービスの自動起動設定および起動させる。
+```
+sudo systemctl daemon-reload
+sudo systemctl enable mydns-ip-update.service --now
+```
 
 ### 動的IPアドレス用サービスを登録する。（不必要ならいらない）
 ```
@@ -70,10 +75,8 @@ ExecStart=/usr/bin/mydns-ip-change.sh
 WantedBy=network-online.target
 ```
 
-### サービスの自動起動設定および起動させる。
+### 動的IPサービスの自動起動設定および起動させる。
 ```
 sudo systemctl daemon-reload
-
-sudo systemctl enable mydns-ip-update.service --now
 sudo systemctl enable mydns-ip-change.service --now
 ```
