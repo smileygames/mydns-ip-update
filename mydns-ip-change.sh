@@ -21,7 +21,6 @@ mydns_change() {
             fi
         fi
     fi
-
 # ipv6
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
         IP6_NEW=$(curl -s ifconfig.io -6)
