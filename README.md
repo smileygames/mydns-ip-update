@@ -70,6 +70,7 @@ ExecStart=/usr/bin/mydns-ip-change.sh
 WantedBy=network-online.target
 ```
 
+### サービスの自動起動設定および起動させる。
 ```
 sudo systemctl daemon-reload
 
