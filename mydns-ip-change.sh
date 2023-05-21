@@ -9,7 +9,7 @@ FILE_DIR="/usr/local/etc/"
 source "${FILE_DIR}mydns-ip-update.conf"
 
 mydns_change() {
-    # ipv4
+# ipv4
     if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
         IP_NEW=$(curl -s ifconfig.io -4)
 
@@ -22,7 +22,7 @@ mydns_change() {
         fi
     fi
 
-    # ipv6
+# ipv6
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
         IP6_NEW=$(curl -s ifconfig.io -6)
 
@@ -36,6 +36,7 @@ mydns_change() {
     fi
 }
 
+# 実行スクリプト（タイマー処理）
 while true;do
   sleep $DDNS_TIME;mydns_change
 done
