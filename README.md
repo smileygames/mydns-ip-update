@@ -54,7 +54,7 @@ WantedBy=network-online.target
 ```
 
 
-### サービスを登録する。（動的IPアドレス用。不必要ならいらない）
+### 動的IPアドレス用サービスを登録する。（不必要ならいらない）
 ```
 sudo vim /etc/systemd/system/mydns-ip-change.service
 ```
