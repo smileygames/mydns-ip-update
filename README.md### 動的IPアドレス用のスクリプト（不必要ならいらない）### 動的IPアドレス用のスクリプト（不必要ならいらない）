@@ -1,4 +1,4 @@
-# mydns-ip-update
+## mydns-ip-update
 mydnsにipを自動でupdateするシェルスクリプト
 
 動的IPアドレス用のスクリプトとサービスは固定IPであっても入れていて問題はない。
@@ -10,33 +10,34 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 ファイル属性をそれぞれ下記にする。
 
+### congig file（設定用ファイル）
+```
 場所：/usr/local/etc/mydns-ip-update.conf
-
 sudo chown root:root /usr/local/etc/mydns-ip-update.conf
-
 sudo chmod 644 /usr/local/etc/mydns-ip-update.conf
+```
 
-
+### IPアドレス用のスクリプト（基本）
+```
 場所：/usr/bin/mydns-ip-update.sh
-
 sudo chown root:root /usr/bin/mydns-ip-update.sh
-
 sudo chmod 755 /usr/bin/mydns-ip-update.sh
+```
 
+### 動的IPアドレス用のスクリプト（不必要ならいらない）
 
-# 動的IPアドレス用のスクリプト（不必要ならいらない）
-
+```
 場所：/usr/bin/mydns-ip-change.sh
-
 sudo chown root:root /usr/bin/mydns-ip-update.sh
-
 sudo chmod 755 /usr/bin/mydns-ip-update.sh
+```
 
-# 基本サービスを登録する。
+### 基本サービスを登録する。
 
+```
 sudo vim /etc/systemd/system/mydns-ip-change.service
-
------------------------------
+```
+```
 [Unit]
 Description=mydns-ip-update
 
@@ -46,15 +47,14 @@ ExecStart=/usr/bin/mydns-ip-update.sh
 
 [Install]
 WantedBy=network-online.target
+```
 
------------------------------
 
-
-# サービスを登録する。（動的IPアドレス用。不必要ならいらない）
-
+### サービスを登録する。（動的IPアドレス用。不必要ならいらない）
+```
 sudo vim /etc/systemd/system/mydns-ip-change.service
-
------------------------------
+```
+```
 [Unit]
 Description=mydns-ip-change
 
@@ -64,13 +64,11 @@ ExecStart=/usr/bin/mydns-ip-change.sh
 
 [Install]
 WantedBy=network-online.target
+```
 
------------------------------
-
-
+```
 sudo systemctl daemon-reload
 
 sudo systemctl enable mydns-ip-update.service --now
-
 sudo systemctl enable mydns-ip-change.service --now
-
+```
