@@ -22,5 +22,5 @@ mydns_update() {
 # 実行スクリプト（タイマー処理）
 mydns_update
 while true;do
-  echo "time = $UPDATE_TIME"  # debug
+  sleep $UPDATE_TIME;mydns_update
 done
