@@ -51,6 +51,8 @@ sudo systemctl daemon-reload
 sudo systemctl enable mydns-ip-update.service --now
 ```
 
+
+
 ### 動的IPアドレス用のスクリプト（不必要ならいらない）
 
 ```
