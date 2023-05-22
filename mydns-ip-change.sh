@@ -5,7 +5,7 @@
 # MyDNS
 
 # Config File ロード
-FILE_DIR="/usr/local/etc/"
+FILE_DIR="/home/hal/update/"
 source "${FILE_DIR}mydns-ip-update.conf"
 
 mydns_change() {
@@ -26,19 +26,27 @@ mydns_change() {
 }
 
 multi_domain_ipv4() {
-    for ((i=0 ; i<${#MYDNS_IP[@]}; i++)) do
+    for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
+        echo "dig ${MY_DOMAIN[i]}"
         IP_OLD=$(dig "${MY_DOMAIN[i]}" A +short)
+        echo "NEW = $IP_NEW"
+        echo "OLD = $IP_OLD"
         if [[ $IP_NEW != $IP_OLD ]]; then
-            curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv4.mydns.jp/login.html
+            echo "ipv4 ${MYDNS_IP[i]}:${MYDNS_PASS[i]}"
+#            curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv4.mydns.jp/login.html
         fi
     done
 }
 
 multi_domain_ipv6() {
-    for ((i=0 ; i<${#MYDNS_IP[@]}; i++)) do
+    for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
+        echo "dig ${MY_DOMAIN[i]}"
         IP6_OLD=$(dig "${MY_DOMAIN[i]}" AAAA +short)
+        echo "NEW = $IP6_NEW"
+        echo "OLD = $IP6_OLD"
         if [[ $IP6_NEW != $IP6_OLD ]]; then
-            curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv6.mydns.jp/login.html
+            echo "ivv6 ${MYDNS_IP[i]}:${MYDNS_PASS[i]}"
+#            curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv6.mydns.jp/login.html
         fi
     done
 }
