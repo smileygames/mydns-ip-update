@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # update IP address
 #
@@ -11,11 +11,15 @@ source "${FILE_DIR}mydns-ip-update.conf"
 mydns_update() {
 # ipv4用
   if [ "$IPV4" = on ]; then
-    curl -s -u $MYDNS_IP:$MYDNS_PASS https://ipv4.mydns.jp/login.html
+    for ((i=0 ; i<${#MYDNS_IP[@]}; i++)) do
+      curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv4.mydns.jp/login.html
+    done
   fi
 # ipv6用
   if [ "$IPV6" = on ]; then
-    curl -s -u $MYDNS_IP:$MYDNS_PASS https://ipv6.mydns.jp/login.html
+    for ((i=0 ; i<${#MYDNS_IP[@]}; i++)) do
+      curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} https://ipv6.mydns.jp/login.html
+    done
   fi
 }
 
