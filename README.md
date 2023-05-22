@@ -31,7 +31,7 @@ sudo chmod 755 /usr/bin/mydns-ip-update.sh
 #### 基本サービスを登録する。
 
 ```
-sudo vim /etc/systemd/system/mydns-ip-change.service
+sudo vim /etc/systemd/system/mydns-ip-update.service
 ```
 ```
 [Unit]
