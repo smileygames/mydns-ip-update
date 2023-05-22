@@ -16,8 +16,10 @@ sudo wget -N -P /usr/bin https://github.com/smileygames/mydns-ip-update/releases
 sudo chown root:root /usr/bin/mydns-ip-change.sh
 sudo chmod 755 /usr/bin/mydns-ip-change.sh
 
+
 rm -f /etc/systemd/system/mydns-ip-update.service
 sudo touch /etc/systemd/system/mydns-ip-update.service
+
 echo '[Unit]' >> /etc/systemd/system/mydns-ip-update.service
 echo 'Description=mydns-ip-update' >> /etc/systemd/system/mydns-ip-update.service
 echo '' >> /etc/systemd/system/mydns-ip-update.service
@@ -27,11 +29,14 @@ echo 'ExecStart=/usr/bin/mydns-ip-update.sh' >> /etc/systemd/system/mydns-ip-upd
 echo '' >> /etc/systemd/system/mydns-ip-update.service
 echo '[Install]' >> /etc/systemd/system/mydns-ip-update.service
 echo 'WantedBy=network-online.target' >> /etc/systemd/system/mydns-ip-update.service
+
 sudo chown root:root /etc/systemd/system/mydns-ip-update.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
 
+
 rm -f /etc/systemd/system/mydns-ip-change.service
 sudo touch /etc/systemd/system/mydns-ip-change.service
+
 echo '[Unit]' >> /etc/systemd/system/mydns-ip-change.service
 echo 'Description=mydns-ip-change' >> /etc/systemd/system/mydns-ip-change.service
 echo '' >> /etc/systemd/system/mydns-ip-change.service
@@ -41,7 +46,9 @@ echo 'ExecStart=/usr/bin/mydns-ip-change.sh' >> /etc/systemd/system/mydns-ip-cha
 echo '' >> /etc/systemd/system/mydns-ip-change.service
 echo '[Install]' >> /etc/systemd/system/mydns-ip-change.service
 echo 'WantedBy=network-online.target' >> /etc/systemd/system/mydns-ip-change.service
+
 sudo chown root:root /etc/systemd/system/mydns-ip-change.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-change.service
+
 
 sudo systemctl daemon-reload
