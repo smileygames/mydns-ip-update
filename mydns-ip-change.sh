@@ -26,6 +26,7 @@ mydns_change() {
 }
 
 # 引数としてレコードとLogin URLをもらう $1=レコード $2=URL
+# IP_NEWはコールされる前に入れておくこと
 multi_domain() {
     for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
