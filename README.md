@@ -14,15 +14,15 @@ IP変更時に素早く通知させる為の自動通知スクリプトです。
 ただし、ConfファイルでIPV4_DDNS及びIPV6_DDNSを「off」にしておく。（余計な処理をしなくなる）
 
 ### ワンクリックインストールスクリプトを作成しました。
-インストールコマンド
+▼インストールコマンド
 ```
 bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.02/mydns-ip-install.sh )
 ```
-最初に初期設定を行ってください。
+▼最初に初期設定を行ってください。
 ```
 sudo vim /usr/local/etc/mydns-ip-update.conf
 ```
-次にサービスの起動です。
+▼次にサービスの起動です。
 
 2行目がDDNS用のサブサービス（不必要なら実行しなくてOK）
 ```
@@ -33,7 +33,7 @@ sudo systemctl enable mydns-ip-update.change --now
 ### マニュアルインストール方法
 下記場所にそれぞれファイルを置くか、ファイルを作成して内容をコピーして、
 
-ファイル属性をそれぞれ下記にする。
+▼ファイル属性をそれぞれ下記にする。
 
 #### congig file（設定用ファイル）
 ```
