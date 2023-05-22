@@ -18,11 +18,9 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 sudo vim /usr/local/etc/mydns-ip-update.conf
 ```
 次にサービスの起動です。
+2行目がDDNS用のサブサービス（不必要なら実行しなくてOK）
 ```
 sudo systemctl enable mydns-ip-update.service --now
-```
-DDNS用のサブサービスがこちら（不必要なら実行しなくてOK）
-```
 sudo systemctl enable mydns-ip-update.service --now
 ```
 
