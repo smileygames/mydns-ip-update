@@ -14,6 +14,7 @@ IP変更時に素早く通知させる為の自動通知スクリプトです。
 ただし、ConfファイルでIPV4_DDNS及びIPV6_DDNSを「off」にしておく。（余計な処理をしなくなる）
 
 ### ワンクリックインストールスクリプトを作成しました。
+インストールコマンド
 ```
 bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.02/mydns-ip-install.sh )
 ```
