@@ -11,7 +11,7 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 ### ワンクリックインストールスクリプトを作成しました。
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.01/mydns-ip-install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.02/mydns-ip-install.sh )
 ```
 最初に初期設定を行ってください。
 ```
