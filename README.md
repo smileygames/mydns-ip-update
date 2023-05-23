@@ -45,7 +45,7 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 ```
 場所：/usr/local/etc/mydns-ip-update.conf
 sudo chown root:root /usr/local/etc/mydns-ip-update.conf
-sudo chmod 644 /usr/local/etc/mydns-ip-update.conf
+sudo chmod 600 /usr/local/etc/mydns-ip-update.conf
 ```
 
 #### IPアドレス用のスクリプト（基本）
