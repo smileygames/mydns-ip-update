@@ -23,6 +23,7 @@ mydns_update() {
 multi_domain_update() {
     for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
         if [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
+            echo "MYDNS_ID[$i] MYDNS_PASS[$i] のどれかに値がないエラー"
             continue
         fi 
         curl -sSfu ${MYDNS_ID[i]}:${MYDNS_PASS[i]} $1
