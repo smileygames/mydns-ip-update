@@ -12,14 +12,14 @@ mydns_change() {
 # ipv4
     if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
         IP_NEW=$(curl -s ifconfig.io -4)
-        if [ $IP_NEW != "" ]; then
+        if [[ $IP_NEW != "" ]]; then
             multi_domain "A" "https://ipv4.mydns.jp/login.html"
         fi
     fi
 # ipv6
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
         IP_NEW=$(curl -s ifconfig.io -6)
-        if [ $IP_NEW != "" ]; then
+        if [[ $IP_NEW != "" ]]; then
             multi_domain "AAAA" "https://ipv6.mydns.jp/login.html"
         fi
     fi
