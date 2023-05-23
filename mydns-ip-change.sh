@@ -5,7 +5,7 @@
 # MyDNS
 
 # Config File ロード
-FILE_DIR="/home/hal/update/"
+FILE_DIR="/usr/local/etc/"
 source "${FILE_DIR}mydns-ip-update.conf"
 
 mydns_change() {
@@ -25,16 +25,13 @@ mydns_change() {
     fi
 }
 
-# 引数としてLogin URLをもらう
+# 引数としてレコードとLogin URLをもらう $1=レコード $2=URL
+# IP_NEWはコールされる前に入れておくこと
 multi_domain() {
     for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
-        echo "dig ${MY_DOMAIN[i]}"
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_OLD != "" ]]; then
-            echo "NEW = $IP_NEW"
-            echo "OLD = $IP_OLD"
             if [[ $IP_NEW != $IP_OLD ]]; then
-                echo "curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2"
                 curl -s -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
             fi
         fi
