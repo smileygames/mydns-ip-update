@@ -1,5 +1,5 @@
-## mydns-ip-update
-mydnsにipを自動でupdateするシェルスクリプト(IPv6対応)
+## mydns-ip-update(IPv6対応)
+mydnsにipを自動でupdateするシェルスクリプト
 
 動的IPの場合のMyDNSサーバーへの負荷を極力減らしつつ、
 
