@@ -31,6 +31,9 @@ multi_domain_change() {
     for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_NEW != $IP_OLD ]]; then
+            if [[ $MYDNS_IP[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
+                continue
+            fi 
             curl -sSfu ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
             if [ $? != 0 ]; then 
                 echo "${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2  <- MyDNSへの通知接続エラー"
