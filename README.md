@@ -9,9 +9,13 @@ IP変更時に素早く通知させる為の自動通知スクリプトです。
 
 動作に関しても、簡易チェックしかしてないので、ご了承ください。
 
+<br>
+
 動的IPアドレス用のスクリプトとサービスは固定IPであっても入れていて問題はない。
 
 ただし、confファイルでIPV4_DDNS及びIPV6_DDNSを「off」にしておく。（余計な処理をしなくなる）
+
+<br>
 
 ### ワンクリックインストールスクリプトを作成しました。
 ▼インストールコマンド
@@ -30,11 +34,13 @@ sudo systemctl enable mydns-ip-update.service --now
 sudo systemctl enable mydns-ip-update.change --now
 ```
 
-### アンインストールスクリプトを作成しました。
+#### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
 bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.03/mydns-ip-uninstall.sh )
 ```
+
+<br>
 
 ### マニュアルインストール方法
 下記場所にそれぞれファイルを置くか、ファイルを作成して内容をコピーして、
@@ -78,7 +84,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable mydns-ip-update.service --now
 ```
 
-
+<br>
 
 #### 動的IPアドレス用のスクリプト（不必要ならいらない）
 
