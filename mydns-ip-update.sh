@@ -24,7 +24,7 @@ mydns_update() {
 }
 
 # 実行スクリプト（タイマー処理）
-sleep 5m;mydns_update
+sleep 3m;mydns_update
 while true;do
     sleep $UPDATE_TIME;mydns_update
 done
