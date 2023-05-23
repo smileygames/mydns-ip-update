@@ -30,6 +30,7 @@ mydns_change() {
 multi_domain_change() {
     for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
         if [[ $MY_DOMAIN[i] = "" ]] || [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
+            echo "MY_DOMAIN[$i] MYDNS_ID[$i] MYDNS_ID[$i] のどれかに値がないエラー"
             continue
         fi 
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
