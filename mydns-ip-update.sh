@@ -21,13 +21,13 @@ mydns_update() {
 
 # 引数としてLogin URLをもらう $1=URL
 multi_domain_update() {
-    for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
-        if [[ $MYDNS_IP[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
+    for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
+        if [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
             continue
         fi 
-        curl -sSfu ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $1
+        curl -sSfu ${MYDNS_ID[i]}:${MYDNS_PASS[i]} $1
         if [ $? != 0 ]; then 
-            echo "${MYDNS_IP[i]}:${MYDNS_PASS[i]} $1  <- MyDNSへの通知接続エラー"
+            echo "${MYDNS_ID[i]}:${MYDNS_PASS[i]} $1  <- MyDNSへの通知接続エラー"
         fi
     done
 }

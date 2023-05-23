@@ -28,15 +28,15 @@ mydns_change() {
 # 引数としてレコードとLogin URLをもらう $1=レコード $2=URL
 # IP_NEWはコールされる前に入れておくこと
 multi_domain_change() {
-    for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
+    for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_NEW != $IP_OLD ]]; then
-            if [[ $MYDNS_IP[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
+            if [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
                 continue
             fi 
-            curl -sSfu ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
+            curl -sSfu ${MYDNS_ID[i]}:${MYDNS_PASS[i]} $2
             if [ $? != 0 ]; then 
-                echo "${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2  <- MyDNSへの通知接続エラー"
+                echo "${MYDNS_ID[i]}:${MYDNS_PASS[i]} $2  <- MyDNSへの通知接続エラー"
             fi
         fi
     done
