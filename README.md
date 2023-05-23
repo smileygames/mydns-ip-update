@@ -42,6 +42,16 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 
 <br>
 
+#### 設定変更時
+コンフィグファイルの内容を変更した際は、
+サービスを再起動しないと反映されないので注意です。
+```
+sudo systemctl restart mydns-ip-update.service
+sudo systemctl restart mydns-ip-change.service
+```
+
+<br>
+
 ### マニュアルインストール方法
 下記場所にそれぞれファイルを置くか、ファイルを作成して内容をコピーして、
 
