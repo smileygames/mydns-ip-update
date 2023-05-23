@@ -22,7 +22,12 @@ mydns_update() {
 # 引数としてLogin URLをもらう $1=URL
 multi_domain_update() {
     for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
-        curl -su ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $1
+        curl -sSfu ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
+        if [ $? != 0 ]; then 
+            echo "curl -u ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2"
+            echo "↑ MyDNSへの通知接続エラー"
+            exit 1
+        fi
     done
 }
 
