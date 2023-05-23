@@ -18,35 +18,36 @@ sudo chmod 755 /usr/bin/mydns-ip-change.sh
 
 
 sudo rm -f /etc/systemd/system/mydns-ip-update.service
-sudo touch /etc/systemd/system/mydns-ip-update.service
+touch ./mydns-ip-update.service
 
-sudo echo '[Unit]' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo 'Description=mydns-ip-update' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo '' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo '[Service]' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo 'Type=simple' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo 'ExecStart=/usr/bin/mydns-ip-update.sh' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo '' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo '[Install]' >> /etc/systemd/system/mydns-ip-update.service
-sudo echo 'WantedBy=network-online.target' >> /etc/systemd/system/mydns-ip-update.service
+echo '[Unit]' >> ./mydns-ip-update.service
+echo 'Description=mydns-ip-update' >> ./mydns-ip-update.service
+echo '' >> ./mydns-ip-update.service
+echo '[Service]' >> ./mydns-ip-update.service
+echo 'Type=simple' >> ./mydns-ip-update.service
+echo 'ExecStart=/usr/bin/mydns-ip-update.sh' >> ./mydns-ip-update.service
+echo '' >> ./mydns-ip-update.service
+echo '[Install]' >> ./mydns-ip-update.service
+echo 'WantedBy=network-online.target' >> ./mydns-ip-update.service
 
+sudo mv ./mydns-ip-update.service /etc/systemd/system/mydns-ip-update.service
 sudo chown root:root /etc/systemd/system/mydns-ip-update.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
 
-
 sudo rm -f /etc/systemd/system/mydns-ip-change.service
-sudo touch /etc/systemd/system/mydns-ip-change.service
+touch ./mydns-ip-change.service
 
-sudo echo '[Unit]' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo 'Description=mydns-ip-change' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo '' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo '[Service]' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo 'Type=simple' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo 'ExecStart=/usr/bin/mydns-ip-change.sh' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo '' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo '[Install]' >> /etc/systemd/system/mydns-ip-change.service
-sudo echo 'WantedBy=network-online.target' >> /etc/systemd/system/mydns-ip-change.service
+echo '[Unit]' >> ./mydns-ip-change.service
+echo 'Description=mydns-ip-change' >> ./mydns-ip-change.service
+echo '' >> ./mydns-ip-change.service
+echo '[Service]' >> ./mydns-ip-change.service
+echo 'Type=simple' >> ./mydns-ip-change.service
+echo 'ExecStart=/usr/bin/mydns-ip-change.sh' >> ./mydns-ip-change.service
+echo '' >> ./mydns-ip-change.service
+echo '[Install]' >> ./mydns-ip-change.service
+echo 'WantedBy=network-online.target' >> ./mydns-ip-change.service
 
+sudo mv ./mydns-ip-change.service /etc/systemd/system/mydns-ip-change.service
 sudo chown root:root /etc/systemd/system/mydns-ip-change.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-change.service
 
