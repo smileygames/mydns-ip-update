@@ -31,12 +31,7 @@ multi_domain_change() {
     for (( i = 0 ; i < ${#MYDNS_IP[@]} ; i++ )) do
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_OLD != "" ]] && [[ $IP_NEW != $IP_OLD ]]; then
-            timeout 10 curl -su ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
-            if [ $? != 0 ]; then 
-                # タイムアウト時の処理
-                echo "Time Out!"
-                exit
-            fi
+            curl -su ${MYDNS_IP[i]}:${MYDNS_PASS[i]} $2
         fi
     done
 }
