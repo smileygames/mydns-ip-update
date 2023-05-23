@@ -16,35 +16,32 @@ sudo wget -N -P /usr/bin https://github.com/smileygames/mydns-ip-update/releases
 sudo chown root:root /usr/bin/mydns-ip-change.sh
 sudo chmod 755 /usr/bin/mydns-ip-change.sh
 
+cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
+[Unit]
+Description=mydns-ip-update
 
-sudo rm -f /etc/systemd/system/mydns-ip-update.service
-sudo touch /etc/systemd/system/mydns-ip-update.service
+[Service]
+Type=simple
+ExecStart=/usr/bin/mydns-ip-update.sh
 
-echo '[Unit]' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo 'Description=mydns-ip-update' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo '' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo '[Service]' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo 'Type=simple' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo 'ExecStart=/usr/bin/mydns-ip-update.sh' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo '' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo '[Install]' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
-echo 'WantedBy=network-online.target' | sudo tee -a /etc/systemd/system/mydns-ip-update.service
+[Install]
+WantedBy=network-online.target
+EOS
 
 sudo chown root:root /etc/systemd/system/mydns-ip-update.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
 
-sudo rm -f /etc/systemd/system/mydns-ip-change.service
-sudo touch /etc/systemd/system/mydns-ip-change.service
+cat << EOS | sudo tee /etc/systemd/system/mydns-ip-change.service
+[Unit]
+Description=mydns-ip-change
 
-echo '[Unit]' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo 'Description=mydns-ip-change' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo '' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo '[Service]' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo 'Type=simple' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo 'ExecStart=/usr/bin/mydns-ip-change.sh' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo '' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo '[Install]' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
-echo 'WantedBy=network-online.target' | sudo tee -a /etc/systemd/system/mydns-ip-change.service
+[Service]
+Type=simple
+ExecStart=/usr/bin/mydns-ip-change.sh
+
+[Install]
+WantedBy=network-online.target
+EOS
 
 sudo chown root:root /etc/systemd/system/mydns-ip-change.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-change.service
