@@ -37,7 +37,7 @@ sudo vim /usr/local/etc/mydns-ip-update.conf
 2行目がDDNS用のサブサービス（不必要なら実行しなくてOK）
 ```
 sudo systemctl enable mydns-ip-update.service --now
-sudo systemctl enable mydns-ip-update.change --now
+sudo systemctl enable mydns-ip-change.service --now
 ```
 
 #### アンインストールスクリプトを作成しました。
