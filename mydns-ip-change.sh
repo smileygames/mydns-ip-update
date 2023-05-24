@@ -28,16 +28,18 @@ mydns_change() {
 # 引数としてレコードとLogin URLをもらう $1=レコード $2=URL
 # IP_NEWはコールされる前に入れておくこと
 multi_domain_change() {
-    for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
-        if [[ $MY_DOMAIN[i] = "" ]] || [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
-            echo "MY_DOMAIN[$i] MYDNS_ID[$i] MYDNS_PASS[$i] のどれかに値がないエラー"
+    for i in ${!MYDNS_ID[@]}; do
+        if [[ ${MY_DOMAIN[$i]} = "" ]] || [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
+            echo "ERROR : MY_DOMAIN[$i] MYDNS_ID[$i] MYDNS_PASS[$i]  <- どれかに値がないエラー"
             continue
         fi 
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_NEW != $IP_OLD ]]; then
-            curl -sSfu ${MYDNS_ID[i]}:${MYDNS_PASS[i]} $2
+            MYDNS_ACCESS="${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $2"
+            timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
             if [ $? != 0 ]; then 
-                echo "${MYDNS_ID[i]}:${MYDNS_PASS[i]} $2  <- MyDNSへの通知接続エラー"
+                echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
+                exit 1
             fi
         fi
     done

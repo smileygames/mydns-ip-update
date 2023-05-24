@@ -21,14 +21,17 @@ mydns_update() {
 
 # 引数としてLogin URLをもらう $1=URL
 multi_domain_update() {
-    for (( i = 0 ; i < ${#MYDNS_ID[@]} ; i++ )) do
-        if [[ $MYDNS_ID[i] = "" ]] || [[ $MYDNS_PASS[i] = "" ]]; then
-            echo "MYDNS_ID[$i] MYDNS_PASS[$i] のどれかに値がないエラー"
+    for i in ${!MYDNS_ID[@]}; do
+        if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
+            echo "ERROR : MYDNS_ID[$i] MYDNS_PASS[$i]  <- どちらかに値がないエラー"
             continue
         fi 
-        curl -sSfu ${MYDNS_ID[i]}:${MYDNS_PASS[i]} $1
+
+        MYDNS_ACCESS="${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $1"
+        timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
         if [ $? != 0 ]; then 
-            echo "${MYDNS_ID[i]}:${MYDNS_PASS[i]} $1  <- MyDNSへの通知接続エラー"
+            echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
+            exit 1
         fi
     done
 }
