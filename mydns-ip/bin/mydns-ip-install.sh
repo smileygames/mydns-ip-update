@@ -16,6 +16,14 @@ sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-up
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-change.sh
 sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-change.sh
 
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-install.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-install.sh
+sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-install.sh
+
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-uninstall.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
+sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
+
 cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
 [Unit]
 Description=mydns-ip-update
