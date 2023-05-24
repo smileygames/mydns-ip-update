@@ -19,28 +19,27 @@ mydns_update() {
     fi
 }
 
-# 引数としてLogin URLをもらう $1=URL
+# 引数としてLogin URLをもらう $1=Login URL
 multi_domain_update() {
+    LOGIN_URL=$1
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
             echo "ERROR : MYDNS_ID[$i] MYDNS_PASS[$i]  <- どちらかに値がないエラー"
             continue
         fi 
-        MYDNS_ACCESS="${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $1"
-        mydns_accsse
+        mydns_accsse "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $LOGIN_URL"
     done
 }
 
-# MYDNS_ACCESS が事前に必要、中身は ID:PASS URL となる
-# mydns-ip-change.shでも全く同じ関数がある共通化の仕方は考え中
+# 引数の中身は @1 = "MYDNS_ID:MYDNS_PASS Login_URL" となる
+# 共通関数 mydns-ip-change.shに全く同じ関数がある
 mydns_accsse() {
-    timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
+    MYDNS_ACCESS=$1
+    timeout 15 curl -m 10 -sSu $MYDNS_ACCESS
     if [ $? != 0 ]; then 
-        echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
-        exit 1
+        echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [15sec]"
     fi
 }
-
 
 # 実行スクリプト（タイマー処理）
 sleep 3m;mydns_update
