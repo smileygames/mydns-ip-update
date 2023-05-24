@@ -45,7 +45,7 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 
 #### 設定変更時
 コンフィグファイルの内容を変更した際は、
-サービスを再起動しないと反映されないので注意です。
+サービスを再起動しないと反映されないので注意です。（2行目はDDNS用です）
 ```
 sudo systemctl restart mydns-ip-update.service
 sudo systemctl restart mydns-ip-change.service
