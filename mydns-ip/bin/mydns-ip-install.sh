@@ -16,6 +16,10 @@ sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-up
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-change.sh
 sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-change.sh
 
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-common.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-common.sh
+sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-common.sh
+
 sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-install.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-install.sh
 sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-install.sh
