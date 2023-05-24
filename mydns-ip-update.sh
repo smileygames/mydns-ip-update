@@ -26,15 +26,20 @@ multi_domain_update() {
             echo "ERROR : MYDNS_ID[$i] MYDNS_PASS[$i]  <- どちらかに値がないエラー"
             continue
         fi 
-
         MYDNS_ACCESS="${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $1"
-        timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
-        if [ $? != 0 ]; then 
-            echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
-            exit 1
-        fi
+        mydns_accsse
     done
 }
+
+# MYDNS_ACCESS が事前に必要、中身は ID:PASS URL となる
+mydns_accsse() {
+    timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
+    if [ $? != 0 ]; then 
+        echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
+        exit 1
+    fi
+}
+
 
 # 実行スクリプト（タイマー処理）
 sleep 3m;mydns_update

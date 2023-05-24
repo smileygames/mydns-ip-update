@@ -36,13 +36,18 @@ multi_domain_change() {
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $1 +short)
         if [[ $IP_NEW != $IP_OLD ]]; then
             MYDNS_ACCESS="${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $2"
-            timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
-            if [ $? != 0 ]; then 
-                echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
-                exit 1
-            fi
+            mydns_accsse
         fi
     done
+}
+
+# MYDNS_ACCESS が事前に必要、中身は ID:PASS URL となる
+mydns_accsse() {
+    timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
+    if [ $? != 0 ]; then 
+        echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [60sec]"
+        exit 1
+    fi
 }
 
 # 実行スクリプト（タイマー処理）
