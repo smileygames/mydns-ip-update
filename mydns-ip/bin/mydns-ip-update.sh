@@ -4,9 +4,10 @@
 #
 # MyDNS
 
-# Config File ロード
-FILE_DIR="/usr/local/etc/"
-source "${FILE_DIR}mydns-ip-update.conf"
+# Include File ロード
+FILE_DIR="/usr/local/mydns-ip/"
+source "${FILE_DIR}mydns-ip.conf"
+source "${FILE_DIR}bin/mydns-ip-common.sh"
 
 mydns_update() {
 # ipv4用
@@ -27,18 +28,8 @@ multi_domain_update() {
             echo "ERROR : MYDNS_ID[$i] MYDNS_PASS[$i]  <- どちらかに値がないエラー"
             continue
         fi 
-        mydns_accsse "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $LOGIN_URL"
+        dns_accsse "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $LOGIN_URL"
     done
-}
-
-# 引数の中身は @1 = "MYDNS_ID:MYDNS_PASS Login_URL" となる
-# 共通関数 mydns-ip-change.shに全く同じ関数がある
-mydns_accsse() {
-    MYDNS_ACCESS=$1
-    timeout 15 curl -m 10 -sSu $MYDNS_ACCESS
-    if [ $? != 0 ]; then 
-        echo "ERROR : $MYDNS_ACCESS  <- TIME OUT [15sec]"
-    fi
 }
 
 # 実行スクリプト（タイマー処理）
