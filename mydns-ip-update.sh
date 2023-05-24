@@ -32,6 +32,7 @@ multi_domain_update() {
 }
 
 # MYDNS_ACCESS が事前に必要、中身は ID:PASS URL となる
+# mydns-ip-change.shでも全く同じ関数がある共通化の仕方は考え中
 mydns_accsse() {
     timeout 1m curl -sSfu $MYDNS_ACCESS; if [ $? != 0 ]; then echo "ERROR : $MYDNS_ACCESS  <- 通知接続エラー"; fi
     if [ $? != 0 ]; then 
