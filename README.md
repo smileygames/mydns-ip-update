@@ -19,8 +19,9 @@ IP変更時に素早く通知させる為の自動通知スクリプトです。
 
 ### ワンクリックインストールスクリプトを作成しました。
 ▼インストールコマンド
+上書きインストールにも対応しています。その場合は更新されなかったファイルは上書きされません。
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.04/mydns-ip-install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.05/mydns-ip-install.sh )
 ```
 ▼最初に初期設定を行ってください。
 ```
@@ -37,7 +38,7 @@ sudo systemctl enable mydns-ip-update.change --now
 #### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.04/mydns-ip-uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.05/mydns-ip-uninstall.sh )
 ```
 
 <br>
