@@ -30,7 +30,7 @@ Description=mydns-ip-update
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/mydns-ip-update.sh
+ExecStart=/usr/local/mydns-ip/bin/mydns-ip-update.sh
 
 [Install]
 WantedBy=network-online.target
@@ -45,7 +45,7 @@ Description=mydns-ip-change
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/mydns-ip-change.sh
+ExecStart=/usr/local/mydns-ip/bin/mydns-ip-change.sh
 
 [Install]
 WantedBy=network-online.target
