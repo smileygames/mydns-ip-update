@@ -5,11 +5,11 @@ MyDNS®JP → https://www.mydns.jp/
 
 <br>
 
+v1.08でインストールフォルダ構造が変更になりました。
+
 DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ、
 
 動的IPアドレス変更時に素早く通知させる為の趣味で作った自動通知スクリプトです。
-
-出来るだけシンプルで分かりやすく作ったつもりが段々複雑化してきました。。。
 
 動作に関しては、簡易デバッグテストしかしてないので、ご了承ください。
 
@@ -26,11 +26,11 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 
 上書きインストールにも対応しています。その場合は更新されなかったファイルは上書きされません。
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.05/mydns-ip-install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-install.sh )
 ```
 ▼最初に初期設定を行ってください。
 ```
-sudo vim /usr/local/etc/mydns-ip-update.conf
+sudo vim /usr/local/mydns-ip/mydns-ip.conf
 ```
 ▼次にサービスの起動です。
 
@@ -43,7 +43,7 @@ sudo systemctl enable mydns-ip-change.service --now
 #### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.05/mydns-ip-uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-uninstall.sh )
 ```
 
 <br>
@@ -58,23 +58,30 @@ sudo systemctl restart mydns-ip-change.service
 
 <br>
 
-### マニュアルインストール方法
+### マニュアルインストール方法 (v1.08以降用)
 下記場所にそれぞれファイルを置くか、ファイルを作成して内容をコピーして、
 
 ファイル属性をそれぞれ下記にする。
 
 #### congig file（設定用ファイル）
 ```
-場所：/usr/local/etc/mydns-ip-update.conf
-sudo chown root:root /usr/local/etc/mydns-ip-update.conf
-sudo chmod 600 /usr/local/etc/mydns-ip-update.conf
+場所：/usr/local/mydns-ip/mydns-ip-update.conf
+sudo chown root:root /usr/local/mydns-ip/mydns-ip-update.conf
+sudo chmod 600 /usr/local/mydns-ip/mydns-ip-update.conf
+```
+
+#### 共通用のスクリプト
+```
+場所：/usr/local/mydns-ip/bin/mydns-ip-common.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-common.sh
+sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-common.sh
 ```
 
 #### IPアドレス用のスクリプト（基本）
 ```
-場所：/usr/bin/mydns-ip-update.sh
-sudo chown root:root /usr/bin/mydns-ip-update.sh
-sudo chmod 755 /usr/bin/mydns-ip-update.sh
+場所：/usr/local/mydns-ip/bin/mydns-ip-update.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-update.sh
+sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-update.sh
 ```
 
 ##### 基本サービスを登録する。
@@ -88,7 +95,7 @@ Description=mydns-ip-update
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/mydns-ip-update.sh
+ExecStart=/usr/local/mydns-ip/bin/mydns-ip-update.sh
 
 [Install]
 WantedBy=network-online.target
@@ -105,9 +112,9 @@ sudo systemctl enable mydns-ip-update.service --now
 #### 動的IPアドレス用のスクリプト（不必要ならいらない）
 
 ```
-場所：/usr/bin/mydns-ip-change.sh
-sudo chown root:root /usr/bin/mydns-ip-update.sh
-sudo chmod 755 /usr/bin/mydns-ip-update.sh
+場所：/usr/local/mydns-ip/bin/mydns-ip-change.sh
+sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-update.sh
+sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-update.sh
 ```
 
 ##### 動的IPアドレス用サービスを登録する。（不必要ならいらない）
@@ -120,7 +127,7 @@ Description=mydns-ip-change
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/mydns-ip-change.sh
+ExecStart=/usr/local/mydns-ip/bin/mydns-ip-change.sh
 
 [Install]
 WantedBy=network-online.target
