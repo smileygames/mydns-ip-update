@@ -4,6 +4,23 @@
 #
 # MyDNS 
 
+# サービスの停止
+sudo systemctl stop mydns-ip-update.service
+sudo systemctl disable mydns-ip-update.service
+
+sudo systemctl stop mydns-ip-change.service
+sudo systemctl disable mydns-ip-change.service
+
+sudo systemctl daemon-reload
+
+# v1.06以前用アンインストール処理
+sudo rm -f /usr/local/etc/mydns-ip-update.conf
+sudo rm -f /usr/bin/mydns-ip-update.sh
+sudo rm -f /usr/bin/mydns-ip-change.sh
+sudo rm -f /etc/systemd/system/mydns-ip-update.service
+sudo rm -f /etc/systemd/system/mydns-ip-change.service
+
+# スクリプトファイルダウンロード＆ファイル属性変更
 sudo wget -NP /usr/local/mydns-ip https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip.conf
 sudo chown root:root /usr/local/mydns-ip/mydns-ip.conf
 sudo chmod 600 /usr/local/mydns-ip/mydns-ip.conf
@@ -28,6 +45,7 @@ sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-up
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
 sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
 
+# サービス作成
 cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
 [Unit]
 Description=mydns-ip-update
@@ -58,4 +76,5 @@ EOS
 sudo chown root:root /etc/systemd/system/mydns-ip-change.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-change.service
 
+# デーモンリロードをして追加したサービスを読み込ませる
 sudo systemctl daemon-reload
