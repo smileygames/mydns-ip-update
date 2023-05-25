@@ -13,35 +13,33 @@ sudo systemctl disable mydns-ip-change.service
 
 sudo systemctl daemon-reload
 
-# v1.06以前用アンインストール処理
+# v1.08以前用アンインストール処理
 sudo rm -f /usr/local/etc/mydns-ip-update.conf
 sudo rm -f /usr/bin/mydns-ip-update.sh
 sudo rm -f /usr/bin/mydns-ip-change.sh
-sudo rm -f /etc/systemd/system/mydns-ip-update.service
-sudo rm -f /etc/systemd/system/mydns-ip-change.service
 
 # スクリプトファイルダウンロード＆ファイル属性変更
-sudo wget -NP /usr/local/mydns-ip https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip.conf
+sudo wget -NP /usr/local/mydns-ip https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip.conf
 sudo chown root:root /usr/local/mydns-ip/mydns-ip.conf
 sudo chmod 600 /usr/local/mydns-ip/mydns-ip.conf
 
-sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-update.sh
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-update.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-update.sh
 sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-update.sh
 
-sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-change.sh
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-change.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-change.sh
 sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-change.sh
 
-sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-common.sh
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-common.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-common.sh
 sudo chmod 755 /usr/local/mydns-ip/bin/mydns-ip-common.sh
 
-sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-install.sh
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-install.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-install.sh
 sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-install.sh
 
-sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.06/mydns-ip-uninstall.sh
+sudo wget -NP /usr/local/mydns-ip/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.08/mydns-ip-uninstall.sh
 sudo chown root:root /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
 sudo chmod 600 /usr/local/mydns-ip/bin/mydns-ip-uninstall.sh
 
