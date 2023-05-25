@@ -10,6 +10,8 @@ dns_accsse() {
 
     timeout 20 curl --max-time 15 -sSu $DNS_ACCESS
     if [ $? != 0 ]; then 
-        echo "ERROR : $DNS_ACCESS  <- TIME OUT [20sec]"
+        ERROR_MESSAGE="Failed Timeout 20sec: curl -u $DNS_ACCESS"
+        echo "$ERROR_MESSAGE"
+        logger -ip authpriv.err -t mydns-ip-dns_accsse "mydns-ip-dns_accsse: $ERROR_MESSAGE"
     fi
 }
