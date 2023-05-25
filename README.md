@@ -3,9 +3,9 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 MyDNS®JP → https://www.mydns.jp/
 
-<br>
-
 v1.08でインストールフォルダ構造が変更になりました。
+
+<br>
 
 DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ、
 
