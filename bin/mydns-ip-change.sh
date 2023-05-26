@@ -12,6 +12,7 @@ source "${FILE_DIR}bin/mydns-ip-common.sh"
 mydns_change() {
     if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
         SERVER_IPV4=$(curl -s ifconfig.io -4)
+
         if [[ $SERVER_IPV4 != "" ]]; then
             multi_domain_change $SERVER_IPV4 "A" "https://ipv4.mydns.jp/login.html"
         fi
@@ -19,6 +20,7 @@ mydns_change() {
 
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
         SERVER_IPV6=$(curl -s ifconfig.io -6)
+
         if [[ $SERVER_IPV6 != "" ]]; then
             multi_domain_change $SERVER_IPV6 "AAAA" "https://ipv6.mydns.jp/login.html"
         fi
@@ -36,9 +38,10 @@ multi_domain_change() {
             continue
         fi 
         IP_OLD=$(dig "${MY_DOMAIN[i]}" $DNS_RECORD +short)
+
         if [[ $IP_NEW != $IP_OLD ]]; then
             dns_accsse $i $LOGIN_URL
-         fi
+        fi
     done
 }
 
