@@ -5,7 +5,7 @@
 # MyDNS
 
 # Include File
-FILE_DIR="/usr/local/mydns-ip/"
+FILE_DIR="/usr/local/mydns-ip-update/"
 source "${FILE_DIR}mydns-ip.conf"
 source "${FILE_DIR}bin/mydns-ip-common.sh"
 
