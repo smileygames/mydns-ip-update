@@ -19,6 +19,9 @@ sudo rm -f /usr/bin/mydns-ip-update.sh
 sudo rm -f /usr/bin/mydns-ip-change.sh
 # v1.08以降用
 sudo rm -rf  /usr/local/mydns-ip
+# v1.13以降用
+sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-install.sh
+sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
 
 # スクリプトファイルダウンロード＆ファイル属性変更
 sudo wget -NP /usr/local/mydns-ip-update https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/mydns-ip.conf
