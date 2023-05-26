@@ -4,7 +4,7 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 MyDNS®JP → https://www.mydns.jp/
 
-v1.10でインストールフォルダ構造が変更になりました。
+v1.11でインストールフォルダ構造が変更になりました。
 
 <br>
 
@@ -27,7 +27,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 
 上書きインストールにも対応しています。その場合は更新されなかったファイルは上書きされません。
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.10/mydns-ip-install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.11/mydns-ip-install.sh )
 ```
 ▼最初に初期設定を行ってください。
 ```
@@ -44,7 +44,7 @@ sudo systemctl enable mydns-ip-change.service --now
 #### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.10/mydns-ip-uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.11/mydns-ip-uninstall.sh )
 ```
 
 <br>
