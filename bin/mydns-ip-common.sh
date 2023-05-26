@@ -10,7 +10,7 @@ dns_accsse() {
     ACCESS_URL=$2
     DNS_ACCESS="${MYDNS_ID[$ARRAY_NUM]}:${MYDNS_PASS[$ARRAY_NUM]} $ACCESS_URL"
 
-    timeout 10 curl --max-time 5 -sSu $DNS_ACCESS
+    timeout 20 curl --max-time 15 -sSu $DNS_ACCESS
     if [ $? != 0 ]; then 
         ERROR_MESSAGE="${FUNCNAME[1]}: Failed Timeout 20sec: curl -u MYDNS_ID[$ARRAY_NUM]:MYDNS_PASS[$ARRAY_NUM] $ACCESS_URL"
         echo "$ERROR_MESSAGE"
