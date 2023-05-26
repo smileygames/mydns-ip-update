@@ -10,11 +10,10 @@ source "${FILE_DIR}mydns-ip.conf"
 source "${FILE_DIR}bin/mydns-ip-common.sh"
 
 mydns_update() {
-# ipv4用
     if [ "$IPV4" = on ]; then
         multi_domain_update "https://ipv4.mydns.jp/login.html"
     fi
-# ipv6用
+
     if [ "$IPV6" = on ]; then
         multi_domain_update "https://ipv6.mydns.jp/login.html"
     fi
@@ -25,10 +24,10 @@ multi_domain_update() {
 
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            echo "ERROR : MYDNS_ID[$i] MYDNS_PASS[$i]  <- どちらかに値がないエラー"
+            no_value_err_message "MYDNS_ID[$ARRAY_NUM] or MYDNS_PASS[$ARRAY_NUM]"
             continue
         fi 
-        dns_accsse "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $LOGIN_URL"
+            dns_accsse $i $LOGIN_URL
     done
 }
 
