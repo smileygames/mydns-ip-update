@@ -37,13 +37,13 @@ sudo wget -NP /usr/local/mydns-ip-update/bin https://github.com/smileygames/mydn
 sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
 sudo chmod 755 /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
 
-sudo wget -NP /usr/local/mydns-ip-update/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/mydns-ip-install.sh
-sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-install.sh
-sudo chmod 600 /usr/local/mydns-ip-update/bin/mydns-ip-install.sh
+sudo wget -NP /usr/local/mydns-ip-update https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/install.sh
+sudo chown root:root /usr/local/mydns-ip-update/install.sh
+sudo chmod 600 /usr/local/mydns-ip-update/install.sh
 
-sudo wget -NP /usr/local/mydns-ip-update/bin https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/mydns-ip-uninstall.sh
-sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
-sudo chmod 600 /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
+sudo wget -NP /usr/local/mydns-ip-update https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/uninstall.sh
+sudo chown root:root /usr/local/mydns-ip-update/uninstall.sh
+sudo chmod 600 /usr/local/mydns-ip-update/uninstall.sh
 
 # サービス作成
 cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
