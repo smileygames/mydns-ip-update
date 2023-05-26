@@ -16,9 +16,10 @@ sudo systemctl daemon-reload
 sudo rm -f /usr/local/etc/mydns-ip-update.conf
 sudo rm -f /usr/bin/mydns-ip-update.sh
 sudo rm -f /usr/bin/mydns-ip-change.sh
-
-# v1.06以降用
+# v1.08以降用
 sudo rm -rf  /usr/local/mydns-ip
+# v1.09以降用
+sudo rm -rf  /usr/local/mydns-ip-update
 
 # ALL バージョン用
 sudo rm -f /etc/systemd/system/mydns-ip-update.service
