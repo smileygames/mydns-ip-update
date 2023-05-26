@@ -27,7 +27,7 @@ multi_domain_update() {
             no_value_err_message "MYDNS_ID[$ARRAY_NUM] or MYDNS_PASS[$ARRAY_NUM]"
             continue
         fi 
-            dns_accsse $i $LOGIN_URL
+        dns_accsse $i $LOGIN_URL
     done
 }
 
