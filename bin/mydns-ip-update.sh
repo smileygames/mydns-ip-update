@@ -5,7 +5,8 @@
 # MyDNS
 
 # Include File
-FILE_DIR="/usr/local/mydns-ip-update/"
+#FILE_DIR="/usr/local/mydns-ip-update/"
+FILE_DIR="/home/hal/mydns-ip-update/"
 source "${FILE_DIR}mydns-ip.conf"
 
 MODE=$1
@@ -33,7 +34,8 @@ ip_check() {
 # 実行スクリプト
 case ${MODE} in
    "update")
-        sleep 5m;ip_update
+#        sleep 5m;ip_update
+        sleep 5;ip_update
         while true;do
             sleep $UPDATE_TIME;ip_update
         done
@@ -43,4 +45,7 @@ case ${MODE} in
             sleep $DDNS_TIME;ip_check
         done
         ;;
+    * )
+        echo "${MODE} <- 引数エラーです"
+    ;; 
 esac
