@@ -1,38 +1,46 @@
 #!/bin/bash
 #
-# update IP address
+# mydns ip update
 #
 # MyDNS
 
 # Include File
 FILE_DIR="/usr/local/mydns-ip-update/"
 source "${FILE_DIR}mydns-ip.conf"
-source "${FILE_DIR}bin/mydns-ip-common.sh"
 
-mydns_update() {
+MODE=$1
+
+ip_update() {
     if [ "$IPV4" = on ]; then
-        multi_domain_update "https://ipv4.mydns.jp/login.html"
+        multi_domain_ip.sh "update" "$MYDNS_IPV4_URL"
     fi
 
     if [ "$IPV6" = on ]; then
-        multi_domain_update "https://ipv6.mydns.jp/login.html"
+        multi_domain_ip.sh "update" "$MYDNS_IPV6_URL"
     fi
 }
 
-multi_domain_update() {
-    LOGIN_URL=$1
+ip_check() {
+    if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
+        multi_domain_ip.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
+    fi
 
-    for i in ${!MYDNS_ID[@]}; do
-        if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            no_value_err_message "MYDNS_ID[$ARRAY_NUM] or MYDNS_PASS[$ARRAY_NUM]"
-            continue
-        fi 
-        dns_accsse $i $LOGIN_URL
-    done
+    if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
+        multi_domain_ip.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
+    fi
 }
 
-# 実行スクリプト（タイマー処理）
-sleep 5m;mydns_update
-while true;do
-    sleep $UPDATE_TIME;mydns_update
-done
+# 実行スクリプト
+case ${MODE} in
+   "update")
+        sleep 5m;ip_update
+        while true;do
+            sleep $UPDATE_TIME;ip_update
+        done
+        ;;
+   "check") 
+        while true;do
+            sleep $DDNS_TIME;ip_check
+        done
+        ;;
+esac
