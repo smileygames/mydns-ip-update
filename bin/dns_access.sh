@@ -10,7 +10,7 @@ FILE_DIR="/home/hal/mydns-ip-update/"
 source "${FILE_DIR}mydns-ip.conf"
 
 MODE=$1
-RRAY_NUM=$2
+ARRAY_NUM=$2
 ACCESS_URL=$3
 
 curl_accsse() {
