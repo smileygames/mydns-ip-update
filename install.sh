@@ -20,6 +20,7 @@ sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
 sudo systemctl stop mydns-ip-change.service
 sudo systemctl disable mydns-ip-change.service
 sudo systemctl daemon-reload
+sudo rm -f /usr/local/mydns-ip-update/mydns-ip.conf
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-change.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
