@@ -5,11 +5,11 @@
 # MyDNS
 
 # Include File
-#FILE_DIR="/usr/local/mydns-ip-update/"
-FILE_DIR="/home/hal/mydns-ip-update/"
-source "${FILE_DIR}mydns-ip.conf"
+#File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+source "${File_dir}mydns-ip.conf"
 
-MODE=$1
+Mode=$1
 
 ip_update() {
     if [ "$IPV4" = on ]; then
@@ -32,7 +32,7 @@ ip_check() {
 }
 
 # 実行スクリプト
-case ${MODE} in
+case ${Mode} in
    "update")
 #        sleep 5m;ip_update
         sleep 5;ip_update
@@ -46,6 +46,6 @@ case ${MODE} in
         done
         ;;
     * )
-        echo "[${MODE}] <- 引数エラーです"
+        echo "[${Mode}] <- 引数エラーです"
     ;; 
 esac

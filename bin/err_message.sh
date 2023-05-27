@@ -4,26 +4,26 @@
 #
 # MyDNS
 
-MODE=$1
-CALLER=$2
-MESSAGE=$3
+Mode=$1
+Caller=$2
+Message=$3
 
 timeout_err_message() {
-    ERROR_MESSAGE="${CALLER}: Failed Timeout: ${MESSAGE}"
+    Error_Message="${Caller}: Failed Timeout: ${Message}"
 
-    echo "$ERROR_MESSAGE"
-    logger -ip authpriv.err -t "${CALLER}" "${ERROR_MESSAGE}"
+    echo "$Error_Message"
+    logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
 no_value_err_message() {
-    ERROR_MESSAGE="${CALLER}: no value: ${MESSAGE}"
+    Error_Message="${Caller}: no value: ${Message}"
 
-    echo "$ERROR_MESSAGE"
-    logger -ip authpriv.err -t "${CALLER}" "${ERROR_MESSAGE}"
+    echo "$Error_Message"
+    logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
 # 実行スクリプト
-case ${MODE} in
+case ${Mode} in
    "timeout")
         timeout_err_message
         ;;
@@ -31,6 +31,6 @@ case ${MODE} in
         no_value_err_message
         ;;
     * )
-        echo "[${MODE}] <- 引数エラーです"
+        echo "[${Mode}] <- 引数エラーです"
     ;; 
 esac

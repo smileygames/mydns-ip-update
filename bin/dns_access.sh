@@ -5,30 +5,30 @@
 # MyDNS
 
 # Include File
-#FILE_DIR="/usr/local/mydns-ip-update/"
-FILE_DIR="/home/hal/mydns-ip-update/"
-source "${FILE_DIR}mydns-ip.conf"
+#File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+source "${File_dir}mydns-ip.conf"
 
-MODE=$1
-ARRAY_NUM=$2
-ACCESS_URL=$3
+Mode=$1
+Array_Num=$2
+Access_URL=$3
 
 curl_accsse() {
-    DNS_ACCESS="${MYDNS_ID[$ARRAY_NUM]}:${MYDNS_PASS[$ARRAY_NUM]} $ACCESS_URL"
+    DNS_Access="${MYDNS_ID[$Array_Num]}:${MYDNS_PASS[$Array_Num]} $Access_URL"
 
-#    timeout 20 curl --max-time 15 -sSu $DNS_ACCESS
-    timeout 5 curl --max-time 15 -sSu $DNS_ACCESS
+#    timeout 20 curl --max-time 15 -sSu $DNS_Access
+    timeout 5 curl --max-time 15 -sSu $DNS_Access
     if [ $? != 0 ]; then 
-        ./err_message.sh "timeout" ${FUNCNAME[0]} "20sec: curl -u MYDNS_ID[$ARRAY_NUM]:MYDNS_PASS[$ARRAY_NUM] $ACCESS_URL"
+        ./err_message.sh "timeout" ${FUNCNAME[0]} "20sec: curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] $Access_URL"
     fi
 }
 
 # 実行スクリプト
-case ${MODE} in
+case ${Mode} in
    "curl")
         curl_accsse
         ;;
     * )
-        echo "[${MODE}] <- 引数エラーです"
+        echo "[${Mode}] <- 引数エラーです"
     ;; 
 esac

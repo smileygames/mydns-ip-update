@@ -5,48 +5,48 @@
 # MyDNS
 
 # Include File
-#FILE_DIR="/usr/local/mydns-ip-update/"
-FILE_DIR="/home/hal/mydns-ip-update/"
-source "${FILE_DIR}mydns-ip.conf"
+#File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+source "${File_dir}mydns-ip.conf"
 
-MODE=$1
-LOGIN_URL=$2
-IP_VERSION=$3
-DNS_RECORD=$4
+Mode=$1
+Login_URL=$2
+IP_Version=$3
+DNS_Record=$4
 
 multi_domain_ip_update() {
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            ./err_message.sh "no_value" ${FUNCNAME[0]} "MYDNS_ID[$ARRAY_NUM] or MYDNS_PASS[$ARRAY_NUM]"
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi 
-        ./dns_access.sh "curl" $i $LOGIN_URL
+        ./dns_access.sh "curl" $i $Login_URL
     done
 }
 
 multi_domain_ip_check() {
-    IP_NEW=$(curl -s ifconfig.io -"$IP_VERSION")
+    IP_New=$(curl -s ifconfig.io -"$IP_Version")
 
-    if [[ $IP_NEW = "" ]]; then
+    if [[ $IP_New = "" ]]; then
         ./err_message.sh "no_value" ${FUNCNAME[0]} "自分のIPアドレスを取得できなかった"
         return 1
     fi
 
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MY_DOMAIN[$i]} = "" ]] || [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            ./err_message.sh "no_value" ${FUNCNAME[0]} "MY_DOMAIN[$ARRAY_NUM] or MYDNS_ID[$ARRAY_NUM] or MYDNS_PASS[$ARRAY_NUM]"
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "MY_DOMAIN[$i] or MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi 
-        IP_OLD=$(dig "${MY_DOMAIN[i]}" $DNS_RECORD +short)
+        IP_old=$(dig "${MY_DOMAIN[i]}" $DNS_Record +short)
 
-        if [[ $IP_NEW != $IP_OLD ]]; then
-            ./dns_access.sh "curl" $i $LOGIN_URL
+        if [[ $IP_New != $IP_old ]]; then
+            ./dns_access.sh "curl" $i $Login_URL
         fi
     done
 }
 
 # 実行スクリプト
-case ${MODE} in
+case ${Mode} in
    "update")
         multi_domain_ip_update
         ;;
@@ -54,7 +54,7 @@ case ${MODE} in
         multi_domain_ip_check
         ;;
     * )
-        echo "[${MODE}] <- 引数エラーです"
+        echo "[${Mode}] <- 引数エラーです"
     ;; 
 esac
 
