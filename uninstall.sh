@@ -17,10 +17,11 @@ sudo rm -f /usr/local/etc/mydns-ip-update.conf
 sudo rm -f /usr/bin/mydns-ip-update.sh
 sudo rm -f /usr/bin/mydns-ip-change.sh
 # v1.08以降用
-sudo rm -rf  /usr/local/mydns-ip
+sudo rm -rf /usr/local/mydns-ip
 # v1.11以降用
-sudo rm -rf  /usr/local/mydns-ip-update
-
-# ALL バージョン用
-sudo rm -f /etc/systemd/system/mydns-ip-update.service
 sudo rm -f /etc/systemd/system/mydns-ip-change.service
+
+# v2.00以降用
+sudo rm -rf /usr/local/mydns-ip-update
+sudo rm -f /etc/systemd/system/mydns-ip-update.service
+sudo rm -f /etc/systemd/system/mydns-ip-check.service
