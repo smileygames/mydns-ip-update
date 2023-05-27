@@ -46,6 +46,6 @@ case ${MODE} in
         done
         ;;
     * )
-        echo "${MODE} <- 引数エラーです"
+        echo "[${MODE}] <- 引数エラーです"
     ;; 
 esac

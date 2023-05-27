@@ -9,8 +9,9 @@
 FILE_DIR="/home/hal/mydns-ip-update/"
 source "${FILE_DIR}mydns-ip.conf"
 
-ARRAY_NUM=$1
-ACCESS_URL=$2
+MODE=$1
+RRAY_NUM=$2
+ACCESS_URL=$3
 
 curl_accsse() {
     DNS_ACCESS="${MYDNS_ID[$ARRAY_NUM]}:${MYDNS_PASS[$ARRAY_NUM]} $ACCESS_URL"
@@ -23,4 +24,11 @@ curl_accsse() {
 }
 
 # 実行スクリプト
-curl_accsse
+case ${MODE} in
+   "curl")
+        curl_accsse
+        ;;
+    * )
+        echo "[${MODE}] <- 引数エラーです"
+    ;; 
+esac
