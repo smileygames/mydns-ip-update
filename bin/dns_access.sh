@@ -16,7 +16,7 @@ curl_accsse() {
 
     timeout 20 curl --max-time 15 -sSu $DNS_ACCESS
     if [ $? != 0 ]; then 
-        err_message.sh "timeout" "20sec: curl -u MYDNS_ID[$ARRAY_NUM]:MYDNS_PASS[$ARRAY_NUM] $ACCESS_URL"
+        ./err_message.sh "timeout" "20sec: curl -u MYDNS_ID[$ARRAY_NUM]:MYDNS_PASS[$ARRAY_NUM] $ACCESS_URL"
     fi
 }
 
