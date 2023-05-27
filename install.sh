@@ -43,7 +43,7 @@ sudo rm -rf mydns-ip-update
 
 sudo chown -R root:root /usr/local/mydns-ip-update
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
-sudo chmod 600 /usr/local/mydns-ip-update/mydns-ip.conf
+sudo chmod 400 /usr/local/mydns-ip-update/default.conf
 sudo chmod 600 /usr/local/mydns-ip-update/install.sh
 sudo chmod 600 /usr/local/mydns-ip-update/uninstall.sh
 
