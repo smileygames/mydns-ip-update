@@ -5,8 +5,8 @@
 # MyDNS
 
 # Include File
-#File_dir="/usr/local/mydns-ip-update/"
-File_dir="/home/hal/mydns-ip-update/"
+File_dir="/usr/local/mydns-ip-update/"
+#File_dir="/home/hal/mydns-ip-update/"
 source "${File_dir}mydns-ip.conf"
 source "${File_dir}user.conf"
 
