@@ -37,17 +37,17 @@ installのたびにコンフィグファイルが初期値に戻ってしまう�
 sudo cp -v /usr/local/mydns-ip-update/config/default.conf /usr/local/mydns-ip-update/config/user.conf
 sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
-編集が終わったら権限を変更しておきます。（IDとPASSを管理したファイルの為）
-```
-sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
-```
-
 ```
 MYDNS_ID[1]=""
 MYDNS_PASS[1]=""
 MY_DOMAIN[1]=""
 ```
 をご自分のMyDNSの情報に書き換えて、先頭の#を削除してください。
+
+編集が終わったら権限を変更しておきます。（IDとPASSを管理したファイルの為）
+```
+sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
+```
 
 <br>
 
