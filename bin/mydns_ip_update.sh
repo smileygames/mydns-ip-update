@@ -4,9 +4,8 @@
 #
 # MyDNS
 
-File_dir="/usr/local/mydns-ip-update/"
-#File_dir="/home/hal/mydns-ip-update/"
-source "${File_dir}include.sh"
+source "/usr/local/mydns-ip-update/include/include.sh"
+#source "/home/hal/mydns-ip-update/include/include.sh"
 
 Mode=$1
 
