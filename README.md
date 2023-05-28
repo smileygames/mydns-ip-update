@@ -37,6 +37,11 @@ installのたびにコンフィグファイルが初期値に戻ってしまう�
 sudo cp -v /usr/local/mydns-ip-update/config/default.conf /usr/local/mydns-ip-update/config/user.conf
 sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
+編集が終わったら権限を変更しておきます。（IDとPASSを管理したファイルの為）
+```
+sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
+```
+
 ```
 MYDNS_ID[1]=""
 MYDNS_PASS[1]=""
@@ -85,8 +90,8 @@ sudo rm -rf mydns-ip-update
 sudo chown -R root:root /usr/local/mydns-ip-update
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
 sudo chmod 644 /usr/local/mydns-ip-update/config/default.conf
-sudo chmod 600 /usr/local/mydns-ip-update/install.sh
-sudo chmod 600 /usr/local/mydns-ip-update/uninstall.sh
+sudo chmod 744 /usr/local/mydns-ip-update/install.sh
+sudo chmod 744 /usr/local/mydns-ip-update/uninstall.sh
 ```
 
 ### サービス作成(main)
