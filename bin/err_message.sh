@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# err_message.sh
+# ./err_message.sh
 #
 # Caller = この関数のコール元名
 
