@@ -4,11 +4,9 @@
 #
 # MyDNS
 
-# Include File
 File_dir="/usr/local/mydns-ip-update/"
 #File_dir="/home/hal/mydns-ip-update/"
-source "${File_dir}default.conf"
-source "${File_dir}user.conf"
+source "${File_dir}include.sh"
 
 Mode=$1
 Array_Num=$2
