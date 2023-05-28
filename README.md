@@ -31,7 +31,7 @@ installのたびにコンフィグファイルが初期値に戻ってしまう�
 ユーザー側でコンフィグファイルを作成してもらい、上書きインストールでも変更しないようにしました。
 但し、uninstallコマンドを実行すると消えます。
 ```
-sudo cp -v /usr/local/mydns-ip-update/config/user.conf /usr/local/mydns-ip-update/config/default.conf
+sudo cp -v /usr/local/mydns-ip-update/config/default.conf /usr/local/mydns-ip-update/config/user.conf
 sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
 ```
