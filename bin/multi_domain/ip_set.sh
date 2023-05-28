@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# multi domain ip access
+# ./multi_domain/ip_set.sh
 #
 # MyDNS
 

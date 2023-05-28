@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# mydns ip update
+# ./mydns_ip_update.sh
 #
 # MyDNS
 

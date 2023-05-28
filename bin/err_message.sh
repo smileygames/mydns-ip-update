@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# FUNCNAME[1] = この関数のコール元名
+# ./err_message.sh
 #
-# MyDNS
+# Caller = この関数のコール元名
 
 Mode=$1
 Caller=$2

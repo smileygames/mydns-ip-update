@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# MyDNSへの通知処理
+# ./dns_access.sh
 #
 # MyDNS
 
