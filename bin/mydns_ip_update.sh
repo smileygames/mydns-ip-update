@@ -14,14 +14,14 @@ mydns_ip_update() {
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
             echo "1"
             trap "kill 0" EXIT
-            ./ipv_check.sh "check" &
+            . /ipv_check.sh "check" &
         elif [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
             echo "2"
             trap "kill 0" EXIT
-            ./ipv_check.sh "check" &
+            . ./ipv_check.sh "check" &
         fi
         echo "0"
-       ./ipv_check.sh "update"
+       . ./ipv_check.sh "update"
     fi
 }
 
