@@ -4,27 +4,27 @@
 #
 # MyDNS
 
-File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+#File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 source "${File_dir}config/user.conf"
 
-Mode=$1
-
-ipv_ddns_check() {
-    if [ "$IPV4" = on ]; then
-        if [ "$IPV4_DDNS" = on ]; then
-            ./multi_domain/ip_set.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
+mydns_ip_update() {
+    if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
+        if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
+            echo "1"
+            trap "kill 0" EXIT
+            ./ipv_check.sh "check" &
+        elif [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
+            echo "2"
+            trap "kill 0" EXIT
+            ./ipv_check.sh "check" &
         fi
-        ./multi_domain/ip_set.sh "update" "$MYDNS_IPV4_URL"
-    fi
-
-    if [ "$IPV6" = on ]; then
-        if [ "$IPV6_DDNS" = on ]; then
-            ./multi_domain/ip_set.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
-        fi
-        ./multi_domain/ip_set.sh "update" "$MYDNS_IPV6_URL"
+        echo "0"
+       ./ipv_check.sh "update"
     fi
 }
 
 # 実行スクリプト
-ipv_ddns_check
+mydns_ip_update
+

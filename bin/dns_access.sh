@@ -4,7 +4,8 @@
 #
 # MyDNS
 
-File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+#File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 source "${File_dir}config/user.conf"
 
@@ -14,8 +15,10 @@ Access_URL=$3
 
 curl_accsse() {
     DNS_Access="${MYDNS_ID[$Array_Num]}:${MYDNS_PASS[$Array_Num]} $Access_URL"
-    Out_Time=25s
-    Max_Time=21
+#    Out_Time=25s
+#    Max_Time=21
+    Out_Time=10s
+    Max_Time=5
 
     timeout ${Out_Time} curl --max-time ${Max_Time} -sSu $DNS_Access
     if [ $? != 0 ]; then 

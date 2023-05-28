@@ -4,7 +4,8 @@
 #
 # MyDNS
 
-File_dir="/usr/local/mydns-ip-update/"
+File_dir="/home/hal/mydns-ip-update/"
+#File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 source "${File_dir}config/user.conf"
 
@@ -47,15 +48,10 @@ multi_domain_ip_check() {
 # 実行スクリプト
 case ${Mode} in
    "update")
-        sleep 5m;multi_domain_ip_update
-        while true;do
-            sleep $UPDATE_TIME;multi_domain_ip_update
-        done
+        multi_domain_ip_update
         ;;
    "check") 
-        while true;do
-            sleep $DDNS_TIME;multi_domain_ip_check
-        done
+        multi_domain_ip_check
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"
