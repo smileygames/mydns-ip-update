@@ -4,8 +4,6 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 MyDNS®JP → https://www.mydns.jp/
 
-v1.11でインストールフォルダ構造が変更になりました。
-
 <br>
 
 DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ、
@@ -24,27 +22,37 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 
 ### ワンクリックインストールスクリプトを作成しました。
 ▼インストールコマンド
-
-上書きインストールにも対応しています。その場合は更新されなかったファイルは上書きされません。
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.00/install.sh )
 ```
 ▼最初に初期設定を行ってください。
+
+installのたびにコンフィグファイルが初期値に戻ってしまうのも面倒なので
+ユーザー側でコンフィグファイルを作成してもらい、上書きインストールでも変更しないようにしました。
+但し、uninstallコマンドを実行すると消えます。
 ```
-sudo vim /usr/local/mydns-ip-update/mydns-ip.conf
+sudo cp -v /usr/local/mydns-ip-update/config/user.conf /usr/local/mydns-ip-update/config/default.conf
+sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
+```
+MYDNS_ID[1]=""
+MYDNS_PASS[1]=""
+MY_DOMAIN[1]=""
+```
+をご自分のMyDNSの情報に書き換えて、先頭の#を削除してください。
+
 ▼次にサービスの起動です。
 
 2行目がDDNS用のサブサービス（不必要なら実行しなくてOK）
 ```
 sudo systemctl enable mydns-ip-update.service --now
-sudo systemctl enable mydns-ip-change.service --now
+sudo systemctl enable mydns-ip-check.service --now
 ```
 
 #### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v1.13/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.00/uninstall.sh )
 ```
 
 <br>
@@ -54,90 +62,83 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 サービスを再起動しないと反映されないので注意です。（2行目はDDNS用です）
 ```
 sudo systemctl restart mydns-ip-update.service
-sudo systemctl restart mydns-ip-change.service
+sudo systemctl restart mydns-ip-check.service
 ```
-
 <br>
 
-### マニュアルインストール方法 (v1.10以降用)
-下記場所にそれぞれファイルを置くか、ファイルを作成して内容をコピーして、
-
-ファイル属性をそれぞれ下記にする。
-
-#### congig file（設定用ファイル）
+### マニュアルインストール方法
 ```
-場所：/usr/local/mydns-ip-update/mydns-ip.conf
-sudo chown root:root /usr/local/mydns-ip-update/mydns-ip.conf
-sudo chmod 600 /usr/local/mydns-ip-update/mydns-ip.conf
-```
+wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
+sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
+sudo cp -rv mydns-ip-update /usr/local/
+sudo rm -rf mydns-ip-update
 
-#### 共通用のスクリプト
-```
-場所：/usr/local/mydns-ip-update/bin/mydns-ip-common.sh
-sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
-sudo chmod 755 /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
+sudo chown -R root:root /usr/local/mydns-ip-update
+sudo chmod -R 755 /usr/local/mydns-ip-update/bin
+sudo chmod 644 /usr/local/mydns-ip-update/config/default.conf
+sudo chmod 600 /usr/local/mydns-ip-update/install.sh
+sudo chmod 600 /usr/local/mydns-ip-update/uninstall.sh
 ```
 
-#### IPアドレス用のスクリプト（基本）
+#### サービス作成(main)
 ```
-場所：/usr/local/mydns-ip-update/bin/mydns-ip-update.sh
-sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
-sudo chmod 755 /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
+sudo vi /etc/systemd/system/mydns-ip-update.service
 ```
-
-##### 基本サービスを登録する。
-
-```
-sudo vim /etc/systemd/system/mydns-ip-update.service
-```
-
 ```
 [Unit]
 Description=mydns-ip-update
 
 [Service]
 Type=simple
-ExecStart=/usr/local/mydns-ip-update/bin/mydns-ip-update.sh
+WorkingDirectory=/usr/local/mydns-ip-update/bin
+ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh update
 
 [Install]
 WantedBy=network-online.target
 ```
 
-##### 基本サービスの自動起動設定および起動させる。
+権限変更
+```
+sudo chown root:root /etc/systemd/system/mydns-ip-update.service
+sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
+```
+
+#### サービス作成(動的アドレスチェックサービス)
+```
+sudo vi /etc/systemd/system/mydns-ip-check.service
+```
+```
+[Unit]
+Description=mydns-ip-check
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/mydns-ip-update/bin
+ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh check
+
+[Install]
+WantedBy=network-online.target
+```
+
+権限変更
+```
+sudo chown root:root /etc/systemd/system/mydns-ip-check.service
+sudo chmod 644 /etc/systemd/system/mydns-ip-check.service
+```
+
+#### デーモンリロードをして追加したサービスを読み込ませる
 ```
 sudo systemctl daemon-reload
-sudo systemctl enable mydns-ip-update.service --now
 ```
 
 <br>
 
-#### 動的IPアドレス用のスクリプト（不必要ならいらない）
+### スクリプト構成
 
-```
-場所：/usr/local/mydns-ip-update/bin/mydns-ip-change.sh
-sudo chown root:root /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
-sudo chmod 755 /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
-```
+自分なりの解釈のオブジェクト指向もどきで作り直しました。
 
-##### 動的IPアドレス用サービスを登録する。（不必要ならいらない）
-```
-sudo vim /etc/systemd/system/mydns-ip-change.service
-```
+言語はそのままシェルスクリプトです。
 
-```
-[Unit]
-Description=mydns-ip-change
+機能は変わりません。
 
-[Service]
-Type=simple
-ExecStart=/usr/local/mydns-ip-update/bin/mydns-ip-change.sh
-
-[Install]
-WantedBy=network-online.target
-```
-
-##### 動的IPサービスの自動起動設定および起動させる。（不必要ならいらない）
-```
-sudo systemctl daemon-reload
-sudo systemctl enable mydns-ip-change.service --now
-```
+![mydns-ip-update：スクリプト構成図](https://github.com/smileygames/mydns-ip-update/assets/134200591/a2b46e65-f84d-49ea-9794-9d8b84680d08)
