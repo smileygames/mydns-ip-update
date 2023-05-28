@@ -14,21 +14,21 @@ Mode=$1
 
 ip_update() {
     if [ "$IPV4" = on ]; then
-        ./multi/domain_ip.sh "update" "$MYDNS_IPV4_URL"
+        ./multi_domain/ip_set.sh "update" "$MYDNS_IPV4_URL"
     fi
 
     if [ "$IPV6" = on ]; then
-        ./multi/domain_ip.sh "update" "$MYDNS_IPV6_URL"
+        ./multi_domain/ip_set.sh "update" "$MYDNS_IPV6_URL"
     fi
 }
 
 ip_check() {
     if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
-        ./multi/domain_ip.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
+        ./multi_domain/ip_set.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
     fi
 
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
-        ./multi/domain_ip.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
+        ./multi_domain/ip_set.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
     fi
 }
 
