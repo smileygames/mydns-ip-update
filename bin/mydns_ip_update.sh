@@ -6,7 +6,8 @@
 
 #File_dir="/usr/local/mydns-ip-update/"
 File_dir="/home/hal/mydns-ip-update/"
-source "${File_dir}/include.sh"
+source "${File_dir}config/default.conf"
+source "${File_dir}config/user.conf"
 
 Mode=$1
 
