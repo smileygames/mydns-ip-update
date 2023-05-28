@@ -45,8 +45,8 @@ sudo rm -rf mydns-ip-update
 sudo chown -R root:root /usr/local/mydns-ip-update
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
 sudo chmod 644 /usr/local/mydns-ip-update/config/default.conf
-sudo chmod 600 /usr/local/mydns-ip-update/install.sh
-sudo chmod 600 /usr/local/mydns-ip-update/uninstall.sh
+sudo chmod 700 /usr/local/mydns-ip-update/install.sh
+sudo chmod 700 /usr/local/mydns-ip-update/uninstall.sh
 
 # サービス作成
 cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
