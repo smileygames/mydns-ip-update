@@ -47,10 +47,15 @@ multi_domain_ip_check() {
 # 実行スクリプト
 case ${Mode} in
    "update")
-        multi_domain_ip_update
+        sleep 5m;multi_domain_ip_update
+        while true;do
+            sleep $UPDATE_TIME;multi_domain_ip_update
+        done
         ;;
    "check") 
-        multi_domain_ip_check
+        while true;do
+            sleep $DDNS_TIME;multi_domain_ip_check
+        done
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"
