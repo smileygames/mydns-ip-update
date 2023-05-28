@@ -7,6 +7,10 @@
 sudo systemctl stop mydns-ip-update.service
 sudo systemctl disable mydns-ip-update.service
 
+sudo systemctl stop mydns-ip-check.service
+sudo systemctl disable mydns-ip-check.service
+
+# v2.00以前用
 sudo systemctl stop mydns-ip-change.service
 sudo systemctl disable mydns-ip-change.service
 

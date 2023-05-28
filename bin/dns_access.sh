@@ -14,12 +14,12 @@ Access_URL=$3
 
 curl_accsse() {
     DNS_Access="${MYDNS_ID[$Array_Num]}:${MYDNS_PASS[$Array_Num]} $Access_URL"
-    Out_Time=10s
-    Max_Time=5
-#    timeout 20 curl --max-time 15 -sSu $DNS_Access
+    Out_Time=25s
+    Max_Time=21
+
     timeout ${Out_Time} curl --max-time ${Max_Time} -sSu $DNS_Access
     if [ $? != 0 ]; then 
-        ./err_message.sh "timeout" ${FUNCNAME[0]} "${Out_Time}: curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] $Access_URL"
+        ./err_message.sh "timeout" ${FUNCNAME[1]} "${Out_Time}: curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] $Access_URL"
     fi
 }
 

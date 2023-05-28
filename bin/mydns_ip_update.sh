@@ -33,8 +33,7 @@ ip_check() {
 # 実行スクリプト
 case ${Mode} in
    "update")
-#        sleep 5m;ip_update
-        sleep 5;ip_update
+        sleep 5m;ip_update
         while true;do
             sleep $UPDATE_TIME;ip_update
         done
