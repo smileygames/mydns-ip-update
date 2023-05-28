@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./dns_access.sh
+# dns_access.sh
 #
 # MyDNS
 

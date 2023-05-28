@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./include.sh
+# include.sh
 #
 # Include File
 
