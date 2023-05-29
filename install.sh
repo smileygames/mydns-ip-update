@@ -2,7 +2,7 @@
 #
 # update ddns install.sh
 #
-# MyDNS 
+# MyDNS
 
 Ver="2.02"
 
