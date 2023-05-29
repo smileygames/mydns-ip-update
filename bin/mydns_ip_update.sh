@@ -6,10 +6,10 @@
 
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
-File="${File_dir}config/user.conf"
+User_File="${File_dir}config/user.conf"
 
-if [ -e ${File} ]; then
-    source "${File}"
+if [ -e ${User_File} ]; then
+    source "${User_File}"
 fi
 
 Mode=$1
