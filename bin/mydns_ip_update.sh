@@ -21,7 +21,8 @@ mydns_ip_update() {
             ./ipv_check.sh "check" &
         fi
         echo "0"
-       . ./ipv_check.sh "update"
+        trap "kill 0" EXIT
+        ./ipv_check.sh "update" &
     fi
 }
 

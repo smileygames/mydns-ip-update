@@ -19,8 +19,6 @@ curl_accsse() {
     if [ $? != 0 ]; then 
         . ./err_message.sh "timeout" ${FUNCNAME[0]} "${Out_Time}: curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] $Access_URL"
     fi
-
-    exit 1
 }
 
 # 実行スクリプト

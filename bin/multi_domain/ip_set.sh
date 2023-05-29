@@ -36,6 +36,7 @@ multi_domain_ip_check() {
 
         if [[ $IP_New != $IP_old ]]; then
             . ./dns_access.sh "curl" $i $Login_URL
+            exit 1  # debug
         fi
     done
 }
