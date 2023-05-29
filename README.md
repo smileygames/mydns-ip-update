@@ -23,7 +23,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプトを作成しました。
 ### インストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.00/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.02/install.sh )
 ```
 
 <br>
@@ -63,7 +63,7 @@ sudo systemctl enable mydns-ip-check.service --now
 ### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.00/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.02/uninstall.sh )
 ```
 
 <br>
