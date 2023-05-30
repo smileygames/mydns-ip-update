@@ -7,7 +7,11 @@
 #File_dir="/home/hal/update/mydns-ip-update/"
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
-source "${File_dir}config/user.conf"
+User_File="${File_dir}config/user.conf"
+
+if [ -e ${User_File} ]; then
+    source "${User_File}"
+fi
 
 mydns_ip_update() {
     if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
