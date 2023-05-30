@@ -10,6 +10,7 @@ source "${File_dir}config/default.conf"
 source "${File_dir}config/user.conf"
 
 Mode=$1
+ddns_Mode=$2
 
 ip_update() {
     if [ "$IPV4" = on ]; then
@@ -22,11 +23,11 @@ ip_update() {
 }
 
 ip_check() {
-    if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
+    if [ "$ddns_Mode" = "ipv4_ddns" ]; then
         . ./multi_domain/ip_set.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
     fi
 
-    if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
+    if [ "$ddns_Mode" = "ipv6_ddns" ]; then
         . ./multi_domain/ip_set.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
     fi
 }
