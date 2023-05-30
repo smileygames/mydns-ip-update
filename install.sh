@@ -17,20 +17,25 @@ sudo rm -rf  /usr/local/mydns-ip
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-install.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
 # v2.00以前用
-sudo systemctl stop mydns-ip-change.service
-sudo systemctl disable mydns-ip-change.service
-sudo rm -f /etc/systemd/system/mydns-ip-change.service
-sudo systemctl daemon-reload
+File="/usr/local/mydns-ip-update/bin/mydns-ip-change.sh"
+if [ -e ${File} ]; then
+    sudo rm -f /etc/systemd/system/mydns-ip-change.service
+    sudo systemctl stop mydns-ip-change.service
+    sudo systemctl disable mydns-ip-change.service
+fi
 sudo rm -f /usr/local/mydns-ip-update/mydns-ip.conf
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-change.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
-# v2.02 以前用
-sudo rm -f /etc/systemd/system/mydns-ip-check.service
-sudo systemctl stop mydns-ip-check.service
-sudo systemctl disable mydns-ip-check.service
+# v2.03 以前用
+File="/etc/systemd/system/mydns-ip-check.service"
+if [ -e ${File} ]; then
+    sudo rm -f /etc/systemd/system/mydns-ip-check.service
+    sudo systemctl stop mydns-ip-check.service
+    sudo systemctl disable mydns-ip-check.service
+fi
 
-# v2.00以降のインストール用
+# v2.03以降のインストール用
 # サービスの停止
 sudo systemctl stop mydns-ip-update.service
 sudo systemctl disable mydns-ip-update.service
