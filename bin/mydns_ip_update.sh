@@ -26,7 +26,7 @@ mydns_ip_update() {
         ./ipv_check.sh "update" &
 
        	wait -n
-        ./err_message.sh "process" ${FUNCNAME[0]} "error endcode = $?  プロセスのどれかが異常終了しました。"
+        ./err_message.sh "process" ${FUNCNAME[0]} "error endcode = $?  プロセスのどれかが異常終了した為、強制終了しました。"
         exit 1
     fi
 }
