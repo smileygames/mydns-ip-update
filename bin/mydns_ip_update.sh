@@ -23,7 +23,6 @@ mydns_ip_update() {
 
        	wait -n
         ./err_message.sh "process" ${FUNCNAME[0]} "error endcode = $?  プロセスのどれかが異常終了しました。"
-    	wait
         exit 1
     fi
 }
