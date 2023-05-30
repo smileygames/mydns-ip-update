@@ -25,16 +25,15 @@ sudo rm -f /usr/local/mydns-ip-update/mydns-ip.conf
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-change.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
+# v2.02 以前用
+sudo rm -f /etc/systemd/system/mydns-ip-check.service
+sudo systemctl stop mydns-ip-check.service
+sudo systemctl disable mydns-ip-check.service
 
 # v2.00以降のインストール用
 # サービスの停止
 sudo systemctl stop mydns-ip-update.service
 sudo systemctl disable mydns-ip-update.service
-
-sudo systemctl stop mydns-ip-check.service
-sudo systemctl disable mydns-ip-check.service
-
-sudo systemctl daemon-reload
 
 # スクリプトファイルダウンロード＆ファイル属性変更
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./

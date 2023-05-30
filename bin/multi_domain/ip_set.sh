@@ -23,7 +23,7 @@ multi_domain_ip_check() {
     IP_New=$(curl -s ifconfig.io -"$IP_Version")
 
     if [[ $IP_New = "" ]]; then
-        . ./err_message.sh "no_value" ${FUNCNAME[0]} "自分のIPアドレスを取得できなかった"
+        ./err_message.sh "no_value" ${FUNCNAME[0]} "自分のIPアドレスを取得できなかった"
         return 1
     fi
 
