@@ -12,7 +12,7 @@ DNS_Record=$4
 multi_domain_ip_update() {
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            . ./err_message.sh "no_value" ${FUNCNAME[0]} "MYDNS_ID[$i] or MYDNS_PASS[$i]"
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi 
         . ./dns_access.sh "curl" $i $Login_URL
@@ -29,7 +29,7 @@ multi_domain_ip_check() {
 
     for i in ${!MYDNS_ID[@]}; do
         if [[ ${MY_DOMAIN[$i]} = "" ]] || [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            . ./err_message.sh "no_value" ${FUNCNAME[0]} "MY_DOMAIN[$i] or MYDNS_ID[$i] or MYDNS_PASS[$i]"
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "MY_DOMAIN[$i] or MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi 
         IP_old=$(dig "${MY_DOMAIN[i]}" $DNS_Record +short)
