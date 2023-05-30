@@ -16,17 +16,17 @@ fi
 mydns_ip_update() {
     if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
-#            trap "kill 0" EXIT
+            trap "kill 1" EXIT
             ./ipv_check.sh "check" &
         elif [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
-#            trap "kill 0" EXIT
+            trap "kill 1" EXIT
             ./ipv_check.sh "check" &
         fi
-#        trap "kill 0" EXIT
+        trap "kill 1" EXIT
         ./ipv_check.sh "update" &
 
        	wait -n
-        ./err_message.sh "process" ${FUNCNAME[0]} "error endcode = $?  プロセスのどれかが異常終了した為、強制終了しました。"
+        ./err_message.sh "process" ${FUNCNAME[0]} "error endcode=$?  プロセスのどれかが異常終了した為、強制終了しました。"
         exit 1
     fi
 }

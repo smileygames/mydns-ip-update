@@ -47,22 +47,19 @@ Message=$3
 
 timeout_err_message() {
     Error_Message="${Caller}: Failed Timeout: ${Message}"
-
-    echo "$Error_Message"
+#    echo "$Error_Message"
     logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
 no_value_err_message() {
     Error_Message="${Caller}: no value: ${Message}"
-
-    echo "$Error_Message"
+#    echo "$Error_Message"
     logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
 process_err_message() {
     Error_Message="${Caller}: abend error : ${Message}"
-
-    echo "$Error_Message"
+#    echo "$Error_Message"
     logger -ip daemon.err -t "${Caller}" "${Error_Message}"
 }
 

@@ -34,17 +34,14 @@ ip_check() {
 # 実行スクリプト
 case ${Mode} in
    "update")
-#        sleep 5m;ip_update
-        sleep 5;ip_update
+        sleep 5m;ip_update
         while true;do
             sleep $UPDATE_TIME;ip_update
-            echo "3"
         done
         ;;
    "check") 
         while true;do
             sleep $DDNS_TIME;ip_check
-            echo "4"
         done
         ;;
     * )
