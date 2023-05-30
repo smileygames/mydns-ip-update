@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./mydns_ip_update.sh
+# ./ipv_check.sh
 #
 # MyDNS
 
