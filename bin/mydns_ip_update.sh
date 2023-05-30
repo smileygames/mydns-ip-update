@@ -17,10 +17,10 @@ mydns_ip_update() {
     if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
             trap "kill 1" EXIT
-            ./ipv_check.sh "check" "ipv4_ddns" &
+            ./ipv_check.sh "check" &
         elif [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
             trap "kill 1" EXIT
-            ./ipv_check.sh "check" "ipv6_ddns" &
+            ./ipv_check.sh "check" &
         fi
         trap "kill 1" EXIT
         ./ipv_check.sh "update" &
