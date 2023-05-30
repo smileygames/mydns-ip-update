@@ -56,7 +56,7 @@ Description=mydns-ip-update
 [Service]
 Type=simple
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh update
+ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh
 
 [Install]
 WantedBy=network-online.target
@@ -64,22 +64,6 @@ EOS
 
 sudo chown root:root /etc/systemd/system/mydns-ip-update.service
 sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
-
-cat << EOS | sudo tee /etc/systemd/system/mydns-ip-check.service
-[Unit]
-Description=mydns-ip-check
-
-[Service]
-Type=simple
-WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh check
-
-[Install]
-WantedBy=network-online.target
-EOS
-
-sudo chown root:root /etc/systemd/system/mydns-ip-check.service
-sudo chmod 644 /etc/systemd/system/mydns-ip-check.service
 
 # デーモンリロードをして追加したサービスを読み込ませる
 sudo systemctl daemon-reload
