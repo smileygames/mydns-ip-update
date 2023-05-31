@@ -4,7 +4,7 @@
 #
 # MyDNS
 
-Ver="2.02"
+Ver="2.03"
 
 # 以前のバージョンのアンインストール処理
 # v1.08以前用
@@ -17,24 +17,26 @@ sudo rm -rf  /usr/local/mydns-ip
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-install.sh
 sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-uninstall.sh
 # v2.00以前用
-sudo systemctl stop mydns-ip-change.service
-sudo systemctl disable mydns-ip-change.service
-sudo rm -f /etc/systemd/system/mydns-ip-change.service
-sudo systemctl daemon-reload
+File="/usr/local/mydns-ip-update/bin/mydns-ip-change.sh"
+if [ -e ${File} ]; then
+    sudo rm -f /etc/systemd/system/mydns-ip-change.service
+    sudo systemctl stop mydns-ip-change.service
+    sudo systemctl disable mydns-ip-change.service
+fi
 sudo rm -f /usr/local/mydns-ip-update/mydns-ip.conf
-sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-update.sh
-sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-change.sh
-sudo rm -f /usr/local/mydns-ip-update/bin/mydns-ip-common.sh
+sudo rm -rf /usr/local/mydns-ip-update/bin
+# v2.03 以前用
+File="/etc/systemd/system/mydns-ip-check.service"
+if [ -e ${File} ]; then
+    sudo rm -f /etc/systemd/system/mydns-ip-check.service
+    sudo systemctl stop mydns-ip-check.service
+    sudo systemctl disable mydns-ip-check.service
+fi
 
-# v2.00以降のインストール用
+# v2.03以降のインストール用
 # サービスの停止
 sudo systemctl stop mydns-ip-update.service
 sudo systemctl disable mydns-ip-update.service
-
-sudo systemctl stop mydns-ip-check.service
-sudo systemctl disable mydns-ip-check.service
-
-sudo systemctl daemon-reload
 
 # スクリプトファイルダウンロード＆ファイル属性変更
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
@@ -42,11 +44,7 @@ sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
 sudo rm -rf mydns-ip-update
 
-sudo chown -R root:root /usr/local/mydns-ip-update
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
-sudo chmod 644 /usr/local/mydns-ip-update/config/default.conf
-sudo chmod 744 /usr/local/mydns-ip-update/install.sh
-sudo chmod 744 /usr/local/mydns-ip-update/uninstall.sh
 
 # サービス作成
 cat << EOS | sudo tee /etc/systemd/system/mydns-ip-update.service
@@ -55,31 +53,13 @@ Description=mydns-ip-update
 
 [Service]
 Type=simple
+Restart=on-failure
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh update
+ExecStart=/usr/local/mydns-ip-update/bin/ddns_timer_select.sh
 
 [Install]
 WantedBy=network-online.target
 EOS
-
-sudo chown root:root /etc/systemd/system/mydns-ip-update.service
-sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
-
-cat << EOS | sudo tee /etc/systemd/system/mydns-ip-check.service
-[Unit]
-Description=mydns-ip-check
-
-[Service]
-Type=simple
-WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh check
-
-[Install]
-WantedBy=network-online.target
-EOS
-
-sudo chown root:root /etc/systemd/system/mydns-ip-check.service
-sudo chmod 644 /etc/systemd/system/mydns-ip-check.service
 
 # デーモンリロードをして追加したサービスを読み込ませる
 sudo systemctl daemon-reload
