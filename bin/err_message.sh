@@ -72,7 +72,7 @@ case ${Mode} in
         no_value_err_message
         ;;
    "process")
-        timeout_err_message
+        process_err_message
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"

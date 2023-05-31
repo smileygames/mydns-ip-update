@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./mydns_ip_update.sh
+# ./ddns_timer_select.sh
 #
 # MyDNS
 
@@ -13,7 +13,7 @@ if [ -e ${User_File} ]; then
     source "${User_File}"
 fi
 
-mydns_ip_update() {
+timer_select() {
     if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
             trap "kill 1" EXIT
@@ -32,5 +32,5 @@ mydns_ip_update() {
 }
 
 # 実行スクリプト
-mydns_ip_update
+timer_select
 
