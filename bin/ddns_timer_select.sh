@@ -4,7 +4,6 @@
 #
 # MyDNS
 
-#File_dir="/home/hal/update/mydns-ip-update/"
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 User_File="${File_dir}config/user.conf"

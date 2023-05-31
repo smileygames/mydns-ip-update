@@ -24,7 +24,7 @@ if [ -e ${File} ]; then
     sudo systemctl disable mydns-ip-change.service
 fi
 sudo rm -f /usr/local/mydns-ip-update/mydns-ip.conf
-sudo rm -f /usr/local/mydns-ip-update/bin
+sudo rm -rf /usr/local/mydns-ip-update/bin
 # v2.03 以前用
 File="/etc/systemd/system/mydns-ip-check.service"
 if [ -e ${File} ]; then
@@ -57,8 +57,9 @@ Description=mydns-ip-update
 
 [Service]
 Type=simple
+Restart=on-failure
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh
+ExecStart=/usr/local/mydns-ip-update/bin/ddns_timer_select.sh
 
 [Install]
 WantedBy=network-online.target
