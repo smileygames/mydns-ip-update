@@ -83,7 +83,6 @@ wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.ta
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
 sudo rm -rf mydns-ip-update
-![mydns-ip-update：スクリプト構成図](https://github.com/smileygames/mydns-ip-update/assets/134200591/60eb54e4-dd3c-4e43-8788-7593a649ab65)
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
 ```
 
@@ -120,4 +119,4 @@ sudo systemctl daemon-reload
 
 機能は変わりません。
 
-![mydns-ip-update：スクリプト構成図 (1)](https://github.com/smileygames/mydns-ip-update/assets/134200591/e74815f4-7337-47cc-9e7d-9a60a4c802e9)
+![mydns-ip-update：スクリプト構成図 (1)](https://github.com/smileygames/mydns-ip-update/assets/134200591/c450cfac-0c51-42d4-a26b-50cb49937ad7)
