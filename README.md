@@ -23,7 +23,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプトを作成しました。
 ### インストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.02/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.03/install.sh )
 ```
 
 <br>
@@ -53,17 +53,15 @@ sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
 
 ▼次にサービスの起動です。
 
-2行目がDDNS用のサブサービス（不必要なら実行しなくてOK）
 ```
 sudo systemctl enable mydns-ip-update.service --now
-sudo systemctl enable mydns-ip-check.service --now
 ```
 <br>
 
 ### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.02/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.03/uninstall.sh )
 ```
 
 <br>
@@ -73,7 +71,6 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 サービスを再起動しないと反映されないので注意です。（2行目はDDNS用です）
 ```
 sudo systemctl restart mydns-ip-update.service
-sudo systemctl restart mydns-ip-check.service
 ```
 <br>
 
@@ -86,15 +83,11 @@ wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.ta
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
 sudo rm -rf mydns-ip-update
-
-sudo chown -R root:root /usr/local/mydns-ip-update
+![mydns-ip-update：スクリプト構成図](https://github.com/smileygames/mydns-ip-update/assets/134200591/60eb54e4-dd3c-4e43-8788-7593a649ab65)
 sudo chmod -R 755 /usr/local/mydns-ip-update/bin
-sudo chmod 644 /usr/local/mydns-ip-update/config/default.conf
-sudo chmod 744 /usr/local/mydns-ip-update/install.sh
-sudo chmod 744 /usr/local/mydns-ip-update/uninstall.sh
 ```
 
-### サービス作成(main)
+### サービス作成
 ```
 sudo vi /etc/systemd/system/mydns-ip-update.service
 ```
@@ -104,40 +97,12 @@ Description=mydns-ip-update
 
 [Service]
 Type=simple
+Restart=on-failure
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh update
+ExecStart=/usr/local/mydns-ip-update/bin/ddns_timer_select.sh
 
 [Install]
 WantedBy=network-online.target
-```
-
-権限変更
-```
-sudo chown root:root /etc/systemd/system/mydns-ip-update.service
-sudo chmod 644 /etc/systemd/system/mydns-ip-update.service
-```
-
-### サービス作成(動的アドレスチェックサービス)
-```
-sudo vi /etc/systemd/system/mydns-ip-check.service
-```
-```
-[Unit]
-Description=mydns-ip-check
-
-[Service]
-Type=simple
-WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/mydns_ip_update.sh check
-
-[Install]
-WantedBy=network-online.target
-```
-
-権限変更
-```
-sudo chown root:root /etc/systemd/system/mydns-ip-check.service
-sudo chmod 644 /etc/systemd/system/mydns-ip-check.service
 ```
 
 ### デーモンリロードをして追加したサービスを読み込ませる
@@ -155,4 +120,4 @@ sudo systemctl daemon-reload
 
 機能は変わりません。
 
-![mydns-ip-update：スクリプト構成図](https://github.com/smileygames/mydns-ip-update/assets/134200591/2724af3b-381d-41bf-b238-b748157bc4e7)
+![mydns-ip-update：スクリプト構成図 (1)](https://github.com/smileygames/mydns-ip-update/assets/134200591/e74815f4-7337-47cc-9e7d-9a60a4c802e9)
