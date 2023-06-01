@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./ip_update/ddns_timer.sh
+# ./ddns_timer.sh
 #
 # MyDNS
 
