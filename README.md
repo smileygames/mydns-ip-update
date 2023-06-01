@@ -23,7 +23,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプトを作成しました。
 ### インストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.03/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.04/install.sh )
 ```
 
 <br>
@@ -61,7 +61,7 @@ sudo systemctl enable mydns-ip-update.service --now
 ### アンインストールスクリプトを作成しました。
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.03/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.04/uninstall.sh )
 ```
 
 <br>
@@ -79,6 +79,7 @@ sudo systemctl restart mydns-ip-update.service
 ### ダウンロード及び権限の変更
 
 ```
+Ver="2.04"
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
@@ -98,7 +99,7 @@ Description=mydns-ip-update
 Type=simple
 Restart=on-failure
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/ddns_timer_select.sh
+ExecStart=/usr/local/mydns-ip-update/bin/ip_update.sh
 
 [Install]
 WantedBy=network-online.target

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# ./multi_domain/ip_set.sh
+# ./ddns_timer/multi_domain.sh
 #
 # MyDNS
 
@@ -19,24 +19,16 @@ multi_domain_ip_update() {
     done
 }
 
-multi_domain_ip_check() {
-    IP_New=$(curl -s ifconfig.io -"$IP_Version")
-
-    if [[ $IP_New = "" ]]; then
-        ./err_message.sh "no_value" ${FUNCNAME[0]} "自分のIPアドレスを取得できなかった"
-        return 1
-    fi
-
+multi_domain_mydns_check() {
     for i in ${!MYDNS_ID[@]}; do
-        if [[ ${MY_DOMAIN[$i]} = "" ]] || [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
-            ./err_message.sh "no_value" ${FUNCNAME[0]} "MY_DOMAIN[$i] or MYDNS_ID[$i] or MYDNS_PASS[$i]"
+        if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]] || [[ ${MYDNS_DOMAIN[$i]} = "" ]]; then
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "MYDNS_ID[$i] or MYDNS_PASS[$i] or MYDNS_DOMAIN[$i]"
             continue
         fi 
-        IP_old=$(dig "${MY_DOMAIN[i]}" $DNS_Record +short)
+        IP_old=$(dig "${MYDNS_DOMAIN[i]}" $DNS_Record +short)
 
         if [[ $IP_New != $IP_old ]]; then
             ./dns_access.sh "mydns" $i "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $Login_URL"
-            exit 0
          fi
     done
 }
@@ -47,7 +39,12 @@ case ${Mode} in
         multi_domain_ip_update
         ;;
    "check") 
-        multi_domain_ip_check
+        IP_New=$(curl -s ifconfig.io -"$IP_Version")
+        if [[ $IP_New = "" ]]; then
+            ./err_message.sh "no_value" ${FUNCNAME[0]} "自分のIPアドレスを取得できなかった"
+            return 1
+        fi
+        multi_domain_mydns_check
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"

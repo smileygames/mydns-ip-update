@@ -8,7 +8,7 @@ Mode=$1
 Array_Num=$2
 Access_URL=$3
 
-MyDNS_accsse() {
+mydns_accsse() {
     Out_Time=25s
     Max_Time=21
 
@@ -21,7 +21,7 @@ MyDNS_accsse() {
 # 実行スクリプト
 case ${Mode} in
    "mydns")
-        MyDNS_accsse
+        mydns_accsse
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"

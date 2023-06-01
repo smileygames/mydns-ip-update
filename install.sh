@@ -4,7 +4,7 @@
 #
 # MyDNS
 
-Ver="2.03"
+Ver="2.04"
 
 # 以前のバージョンのアンインストール処理
 # v1.08以前用
@@ -55,7 +55,7 @@ Description=mydns-ip-update
 Type=simple
 Restart=on-failure
 WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/ddns_timer_select.sh
+ExecStart=/usr/local/mydns-ip-update/bin/ip_update.sh
 
 [Install]
 WantedBy=network-online.target
