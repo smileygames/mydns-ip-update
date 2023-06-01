@@ -8,21 +8,20 @@ Mode=$1
 Array_Num=$2
 Access_URL=$3
 
-curl_accsse() {
-    DNS_Access="${MYDNS_ID[$Array_Num]}:${MYDNS_PASS[$Array_Num]} $Access_URL"
+MyDNS_accsse() {
     Out_Time=25s
     Max_Time=21
 
-    timeout ${Out_Time} curl --max-time ${Max_Time} -sSu $DNS_Access
+    timeout ${Out_Time} curl --max-time ${Max_Time} -sSu $Access_URL
     if [ $? != 0 ]; then 
-        ./err_message.sh "timeout" ${FUNCNAME[0]} "${Out_Time}: curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] $Access_URL"
+        ./err_message.sh "timeout" ${FUNCNAME[0]} "${Out_Time}: ログイン情報 MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num]"
     fi
 }
 
 # 実行スクリプト
 case ${Mode} in
-   "curl")
-        curl_accsse
+   "mydns")
+        MyDNS_accsse
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"

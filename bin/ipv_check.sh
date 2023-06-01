@@ -4,13 +4,13 @@
 #
 # MyDNS
 
-File_dir="/usr/local/mydns-ip-update/"
-source "${File_dir}config/default.conf"
-User_File="${File_dir}config/user.conf"
+#File_dir="/usr/local/mydns-ip-update/"
+#source "${File_dir}config/default.conf"
+#User_File="${File_dir}config/user.conf"
 
-if [ -e ${User_File} ]; then
-    source "${User_File}"
-fi
+#if [ -e ${User_File} ]; then
+#    source "${User_File}"
+#fi
 
 Mode=$1
 
@@ -35,7 +35,8 @@ ip_check() {
 # 実行スクリプト
 case ${Mode} in
    "update")
-        sleep 5m;ip_update
+#        sleep 5m;ip_update
+        sleep 5;ip_update
         while true;do
             sleep $UPDATE_TIME;ip_update
         done
