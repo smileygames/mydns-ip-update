@@ -120,4 +120,5 @@ sudo systemctl daemon-reload
 
 機能は変わりません。
 
-![mydns-ip-update：スクリプト構成図 (1)](https://github.com/smileygames/mydns-ip-update/assets/134200591/c450cfac-0c51-42d4-a26b-50cb49937ad7)
+![mydns-ip-update：スクリプト構成図](https://github.com/smileygames/mydns-ip-update/assets/134200591/9653d2eb-5813-4093-b403-4e7da5f34d6f)
+
