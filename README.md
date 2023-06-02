@@ -4,6 +4,8 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 MyDNS®JP → https://www.mydns.jp/
 
+オブジェクト指向化しました。（独自解釈）→ https://smgjp.com/mydns-ip-update_v2-05/
+
 <br>
 
 DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ、
