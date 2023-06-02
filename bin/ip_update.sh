@@ -13,25 +13,27 @@ if [ -e ${User_File} ]; then
 fi
 
 timer_select() {
-    if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
+    if [[ ${!MYDNS_ID[@]} != "" ]]; then
+        if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
+            ./ddns_timer.sh "update" &
+        fi
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
             ./ddns_timer.sh "check" &
 
         elif [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
             ./ddns_timer.sh "check" &
         fi
-        ./ddns_timer.sh "update" &
-
-        while true;do
-            wait -n
-            End_code=$?
-            if [ $End_code != 0 ]; then
-                ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$End_code  プロセスのどれかが異常終了した為、強制終了しました。"
-                exit 1
-            fi
-        done
     fi
 }
 
 # 実行スクリプト
 timer_select
+
+while true;do
+    wait -n
+    End_code=$?
+    if [ $End_code != 0 ]; then
+        ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$End_code  プロセスのどれかが異常終了した為、強制終了しました。"
+        exit 1
+    fi
+done
