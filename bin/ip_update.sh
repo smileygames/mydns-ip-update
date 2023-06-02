@@ -24,9 +24,9 @@ timer_select() {
 
         while true;do
             wait -n
-            end_code=$?
-            if [ $end_code != 0 ]; then
-                ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$end_code  プロセスのどれかが異常終了した為、強制終了しました。"
+            End_code=$?
+            if [ $End_code != 0 ]; then
+                ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$End_code  プロセスのどれかが異常終了した為、強制終了しました。"
                 exit 1
             fi
         done
