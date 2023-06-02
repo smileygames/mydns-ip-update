@@ -25,7 +25,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプト
 ### インストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.05/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.04/install.sh )
 ```
 
 <br>
@@ -63,7 +63,7 @@ sudo systemctl enable mydns-ip-update.service --now
 ### アンインストールスクリプト
 ▼アンインストールコマンド
 ```
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.05/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.04/uninstall.sh )
 ```
 
 <br>
@@ -81,7 +81,7 @@ sudo systemctl restart mydns-ip-update.service
 ### ダウンロード及び権限の変更
 
 ```
-Ver="2.05"
+Ver="2.04"
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
