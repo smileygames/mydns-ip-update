@@ -21,11 +21,12 @@ timer_select() {
             ./ddns_timer.sh "check" &
         fi
         ./ddns_timer.sh "update" &
-        
+
         while true;do
             wait -n
-            if [ $? != 0 ]; then
-                ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$?  プロセスのどれかが異常終了した為、強制終了しました。"
+            end_code=$?
+            if [ $end_code != 0 ]; then
+                ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$end_code  プロセスのどれかが異常終了した為、強制終了しました。"
                 exit 1
             fi
         done
