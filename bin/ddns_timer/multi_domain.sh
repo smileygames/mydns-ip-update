@@ -50,4 +50,3 @@ case ${Mode} in
         echo "[${Mode}] <- 引数エラーです"
     ;; 
 esac
-
