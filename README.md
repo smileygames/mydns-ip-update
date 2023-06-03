@@ -4,7 +4,7 @@ mydnsにipを自動でupdateするシェルスクリプト
 
 MyDNS®JP → https://www.mydns.jp/
 
-オブジェクト指向化しました。（独自解釈）→ https://smgjp.com/mydns-ip-update_v2-05/
+オブジェクト指向化しました。（独自解釈）→ [https://smgjp.com/mydns-ip-update_v2-05/](https://smgjp.com/mydns-ip-update_object/)
 
 <br>
 
@@ -42,7 +42,7 @@ sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
 MYDNS_ID[1]=""
 MYDNS_PASS[1]=""
-MY_DOMAIN[1]=""
+MYDNS_DOMAIN[1]=""
 ```
 をご自分のMyDNSの情報に書き換えて、先頭の#を削除してください。
 
