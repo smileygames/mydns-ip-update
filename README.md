@@ -22,7 +22,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 
 ## ワンクリックインストールスクリプト
 ### インストールコマンド
-```
+```bash
 bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.06/install.sh )
 ```
 
@@ -33,11 +33,11 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 installのたびにコンフィグファイルが初期値に戻ってしまうのも面倒なので
 ユーザー側でコンフィグファイルを作成してもらい、上書きインストールでも変更しないようにしました。
 但し、uninstallコマンドを実行すると消えます。
-```
+```bash
 sudo cp -v /usr/local/mydns-ip-update/config/default.conf /usr/local/mydns-ip-update/config/user.conf
 sudo vim /usr/local/mydns-ip-update/config/user.conf
 ```
-```
+```bash
 MYDNS_ID[1]=""
 MYDNS_PASS[1]=""
 MYDNS_DOMAIN[1]=""
@@ -45,7 +45,7 @@ MYDNS_DOMAIN[1]=""
 をご自分のMyDNSの情報に書き換えて、先頭の#を削除してください。
 
 編集が終わったら権限を変更しておきます。（IDとPASSを管理したファイルの為）
-```
+```bash
 sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
 ```
 
@@ -53,14 +53,14 @@ sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
 
 ▼次にサービスの起動です。
 
-```
+```bash
 sudo systemctl enable mydns-ip-update.service --now
 ```
 <br>
 
 ### アンインストールスクリプト
 ▼アンインストールコマンド
-```
+```bash
 bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.06/uninstall.sh )
 ```
 
@@ -69,7 +69,7 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 ### 設定変更時
 コンフィグファイルの内容を変更した際は、
 サービスを再起動しないと反映されないので注意です。
-```
+```bash
 sudo systemctl restart mydns-ip-update.service
 ```
 <br>
@@ -78,7 +78,7 @@ sudo systemctl restart mydns-ip-update.service
 
 ### ダウンロード及び権限の変更
 
-```
+```bash
 Ver="2.06"
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
@@ -88,10 +88,10 @@ sudo chmod -R 755 /usr/local/mydns-ip-update/bin
 ```
 
 ### サービス作成
-```
+```bash
 sudo vi /etc/systemd/system/mydns-ip-update.service
 ```
-```
+```bash
 [Unit]
 Description=mydns-ip-update
 
@@ -106,7 +106,7 @@ WantedBy=network-online.target
 ```
 
 ### デーモンリロードをして追加したサービスを読み込ませる
-```
+```bash
 sudo systemctl daemon-reload
 ```
 
