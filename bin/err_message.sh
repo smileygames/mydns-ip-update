@@ -3,8 +3,7 @@
 # ./err_message.sh
 #
 # Caller = この関数のコール元名
-:<< err_code
-facility
+:<< facility
 code	facility	対象ログ
 0	    kern    	カーネル
 1	    user    	ユーザープロセス
@@ -39,7 +38,7 @@ code	priority	内容
 5   	notice	    通知
 6   	info	    情報
 7   	debug	    デバッグ情報
-err_code
+facility
 
 Mode=$1
 Caller=$2
