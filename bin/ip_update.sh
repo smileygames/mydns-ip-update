@@ -5,6 +5,7 @@
 # MyDNS
 
 # include file
+# shellcheck source=/dev/null
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 User_File="${File_dir}config/user.conf"
@@ -13,7 +14,7 @@ if [ -e ${User_File} ]; then
 fi
 
 timer_select() {
-    if [[ ${!MYDNS_ID[@]} != "" ]]; then
+    if [ ${#MYDNS_ID[@]} != 0 ]; then
         if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
             ./ddns_timer.sh "update" &
         fi
@@ -33,7 +34,7 @@ while true;do
     wait -n
     End_code=$?
     if [ $End_code != 0 ]; then
-        ./err_message.sh "process" ${FUNCNAME[0]} "endcode=$End_code  プロセスのどれかが異常終了した為、強制終了しました。"
+        ./err_message.sh "process" "ip_update.sh" "endcode=$End_code  プロセスのどれかが異常終了した為、強制終了しました。"
         exit 1
     fi
 done
