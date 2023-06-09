@@ -5,6 +5,7 @@
 # MyDNS
 
 # include file
+# shellcheck source=/dev/null
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 User_File="${File_dir}config/user.conf"
@@ -37,12 +38,12 @@ case ${Mode} in
    "update")
         sleep 5m;ip_update
         while true;do
-            sleep $UPDATE_TIME;ip_update
+            sleep "$UPDATE_TIME";ip_update
         done
         ;;
    "check") 
         while true;do
-            sleep $DDNS_TIME;ip_check
+            sleep "$DDNS_TIME";ip_check
         done
         ;;
     * )

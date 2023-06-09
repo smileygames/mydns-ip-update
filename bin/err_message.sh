@@ -3,7 +3,7 @@
 # ./err_message.sh
 #
 # Caller = この関数のコール元名
-<< err_code
+:<< err_code
 facility
 code	facility	対象ログ
 0	    kern    	カーネル
