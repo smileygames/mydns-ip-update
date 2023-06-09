@@ -23,7 +23,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプト
 ### インストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.06/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.07/install.sh )
 ```
 
 <br>
@@ -61,7 +61,7 @@ sudo systemctl enable mydns-ip-update.service --now
 ### アンインストールスクリプト
 ▼アンインストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.06/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.07/uninstall.sh )
 ```
 
 <br>
@@ -79,7 +79,7 @@ sudo systemctl restart mydns-ip-update.service
 ### ダウンロード及び権限の変更
 
 ```bash
-Ver="2.06"
+Ver="2.07"
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
@@ -120,4 +120,4 @@ sudo systemctl daemon-reload
 
 機能は変わりません。
 
-![mydns-ip-update：スクリプト構成図 (1)](https://github.com/smileygames/mydns-ip-update/assets/134200591/99235248-91c0-4df9-bc56-e6e4a434e454)
+![mydns-ip-update：スクリプト構成図 (2)](https://github.com/smileygames/mydns-ip-update/assets/134200591/19b532f9-8e56-4132-a04e-c18ee4430053)

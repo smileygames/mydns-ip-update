@@ -2,7 +2,7 @@
 #
 # ./dns_access.sh
 #
-# MyDNS
+# shellcheck disable=SC2086
 
 Mode=$1
 Array_Num=$2
@@ -12,7 +12,7 @@ mydns_accsse() {
     Out_Time=25s
     Max_Time=21
 
-    timeout ${Out_Time} curl --max-time ${Max_Time} -sSu "$Access_URL"
+    timeout ${Out_Time} curl --max-time ${Max_Time} -sSu ${Access_URL}
     if [ $? != 0 ]; then 
         ./err_message.sh "timeout" "${FUNCNAME[0]}" "${Out_Time}: ログイン情報 MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num]"
     fi
