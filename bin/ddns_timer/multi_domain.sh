@@ -15,7 +15,7 @@ multi_domain_ip_update() {
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi
-        ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $Login_URL"
+        ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
     done
 }
 
@@ -28,7 +28,7 @@ multi_domain_mydns_check() {
         IP_old=$(dig "${MYDNS_DOMAIN[i]}" "$DNS_Record" +short)
 
         if [[ $IP_New != "$IP_old" ]]; then
-            ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} $Login_URL"
+            ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
          fi
     done
 }

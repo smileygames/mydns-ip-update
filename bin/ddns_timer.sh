@@ -2,10 +2,9 @@
 #
 # ./ddns_timer.sh
 #
-# MyDNS
+# shellcheck source=/dev/null
 
 # include file
-# shellcheck source=/dev/null
 File_dir="/usr/local/mydns-ip-update/"
 source "${File_dir}config/default.conf"
 User_File="${File_dir}config/user.conf"
