@@ -5,9 +5,9 @@
 # shellcheck source=/dev/null
 
 # include file
-File_dir="/usr/local/mydns-ip-update/"
-source "${File_dir}config/default.conf"
-User_File="${File_dir}config/user.conf"
+File_dir="../config/"
+source "${File_dir}default.conf"
+User_File="${File_dir}user.conf"
 if [ -e ${User_File} ]; then
     source "${User_File}"
 fi
