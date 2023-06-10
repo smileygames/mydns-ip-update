@@ -105,11 +105,11 @@ ExecStart=/usr/local/mydns-ip-update/bin/ip_update.sh
 WantedBy=network-online.target
 ```
 
-### デーモンリロードをして追加したサービスを読み込ませる
+### デーモンリロードをして追加したサービスを読み込ませて起動させる
 ```bash
 sudo systemctl daemon-reload
+sudo systemctl enable mydns-ip-update.service --now
 ```
-
 <br>
 
 ## スクリプト構成
