@@ -18,6 +18,9 @@ timer_select() {
         if [ "$IPV4" = on ] || [ "$IPV6" = on ]; then
             ./ddns_timer.sh "update" &  # MyDNSのアップデートタイマーを開始
         fi
+    fi
+
+    if [ ${#MYDNS_ID[@]} != 0 ] || [ ${#GOOGLE_ID[@]} != 0 ]; then
         if [  "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
             ./ddns_timer.sh "check" &  # IPv4のDDNSチェックタイマーを開始
 

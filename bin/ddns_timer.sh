@@ -17,22 +17,23 @@ Mode=$1
 # IPv4とIPv6でアクセスURLを変える
 ip_update() {
     if [ "$IPV4" = on ]; then
-        . ./ddns_timer/multi_domain.sh "update" "$MYDNS_IPV4_URL"
+        . ./ddns_timer/multi_domain.sh "update"
     fi
     if [ "$IPV6" = on ]; then
-        . ./ddns_timer/multi_domain.sh "update" "$MYDNS_IPV6_URL"
+        . ./ddns_timer/multi_domain.sh "update"
     fi
 }
 
 # 動的アドレスモードの場合、チェック用にIPvバージョン情報とレコード情報も追加
 ip_check() {
     if [ "$IPV4" = on ] && [ "$IPV4_DDNS" = on ]; then
-        . ./ddns_timer/multi_domain.sh "check" "$MYDNS_IPV4_URL" "4" "A" 
+        . ./ddns_timer/multi_domain.sh "check" "4" "A" 
     fi
     if [ "$IPV6" = on ] && [ "$IPV6_DDNS" = on ]; then
-        . ./ddns_timer/multi_domain.sh "check" "$MYDNS_IPV6_URL" "6" "AAAA"
+        . ./ddns_timer/multi_domain.sh "check" "6" "AAAA"
     fi
 }
+
 
 # 実行スクリプト
 # タイマー処理
