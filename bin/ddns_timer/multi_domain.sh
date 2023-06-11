@@ -80,12 +80,12 @@ multi_ddns_check() {
     fi
 
     if [ ${#MYDNS_ID[@]} != 0 ]; then
-        multi_domain_mydns_check "$MyIP"
+        multi_domain_mydns_check "$MyIP" &
     fi
 
     # GoogleのDDNSサービスはIPv4とIPv6が排他制御のための処理
     if [ ${#GOOGLE_ID[@]} != 0 ]; then
-        multi_domain_google_check "$MyIP"
+        multi_domain_google_check "$MyIP" &
     fi
 }
 
