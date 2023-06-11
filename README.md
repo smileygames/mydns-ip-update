@@ -1,7 +1,5 @@
 # mydns-ip-update (IPv6 & マルチドメイン対応)
 
-mydnsにipを自動でupdateするシェルスクリプト
-
 MyDNS®JP → https://www.mydns.jp/
 
 オブジェクト指向化しました。（独自解釈）→ https://smgjp.com/mydns-ip-update_object/
