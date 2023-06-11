@@ -41,7 +41,7 @@ case ${Mode} in
         multi_domain_ip_update
         ;;
    "check") 
-        IP_New=$(curl -s ifconfig.io -"$IP_Version")  # 自分のアドレスを読み込む
+        IP_New=$(curl -s http://v"$IP_Version".ident.me)  # 自分のアドレスを読み込む
         if [[ $IP_New = "" ]]; then
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "自分のIPアドレスを取得できなかった"
             return 1
