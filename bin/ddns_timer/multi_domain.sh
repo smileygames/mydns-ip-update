@@ -48,6 +48,7 @@ multi_domain_mydns_check() {
     done
 }
 
+# Googleの場合用のDDNSアクセス
 multi_domain_google_check() {
     IP_New=$1
 
@@ -64,23 +65,35 @@ multi_domain_google_check() {
     done
 }
 
+# 複数のDDNSサービス用
+multi_ddns_check() {
+    MyIP=$(dig @ident.me -"$IP_Version" +short)  # 自分のアドレスを読み込む
+    if [[ $MyIP = "" ]]; then
+        ./err_message.sh "no_value" "${FUNCNAME[0]}" "自分のIPアドレスを取得できなかった"
+        return 1
+    fi
+
+    if [ ${#MYDNS_ID[@]} != 0 ]; then
+        multi_domain_mydns_check "$MyIP"
+    fi
+
+    # GoogleのDDNSサービスはIPv4とIPv6が排他制御のための処理
+    if [ ${#GOOGLE_ID[@]} != 0 ]; then
+        if [ "$IP_Version" = 4 ] && [ "$GOOGLE_IPV6" = off ]; then
+            multi_domain_google_check "$MyIP"
+        elif [ "$IP_Version" = 6 ] && [ "$GOOGLE_IPV6" = on ]; then
+            multi_domain_google_check "$MyIP"
+        fi
+    fi
+}
+
 # 実行スクリプト
 case ${Mode} in
    "update")
         multi_domain_ip_update
         ;;
    "check") 
-        MyIP=$(dig @ident.me -"$IP_Version" +short)  # 自分のアドレスを読み込む
-        if [[ $MyIP = "" ]]; then
-            ./err_message.sh "no_value" "${FUNCNAME[0]}" "自分のIPアドレスを取得できなかった"
-            return 1
-        fi
-        if [ ${#MYDNS_ID[@]} != 0 ]; then
-            multi_domain_mydns_check "$MyIP"
-        fi
-        if [ ${#GOOGLE_ID[@]} != 0 ]; then
-            multi_domain_google_check "$MyIP"
-        fi       
+        multi_ddns_check
         ;;
     * )
         echo "[${Mode}] <- 引数エラーです"
