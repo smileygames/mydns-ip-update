@@ -44,16 +44,19 @@ Mode=$1
 Caller=$2
 Message=$3
 
+# タイムアウトエラー
 timeout_err_message() {
     Error_Message="${Caller}: Failed Timeout: ${Message}"
     logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
+# データがないエラー
 no_value_err_message() {
     Error_Message="${Caller}: no value: ${Message}"
     logger -ip authpriv.err -t "${Caller}" "${Error_Message}"
 }
 
+# バックグラウンドプロセスエラー
 process_err_message() {
     Error_Message="${Caller}: abend error : ${Message}"
     logger -ip daemon.err -t "${Caller}" "${Error_Message}"
