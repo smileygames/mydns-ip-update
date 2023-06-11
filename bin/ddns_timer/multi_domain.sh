@@ -70,7 +70,7 @@ case ${Mode} in
         multi_domain_ip_update
         ;;
    "check") 
-        MyIP=$(curl -s ifconfig.io -"$IP_Version")  # 自分のアドレスを読み込む
+        MyIP=$(dig @ident.me -"$IP_Version" +short)  # 自分のアドレスを読み込む
         if [[ $MyIP = "" ]]; then
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "自分のIPアドレスを取得できなかった"
             return 1
