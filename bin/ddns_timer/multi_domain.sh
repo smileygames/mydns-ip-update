@@ -57,6 +57,12 @@ multi_domain_google_check() {
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "GOOGLE_ID[$i] or GOOGLE_PASS[$i] or GOOGLE_DOMAIN[$i]"
             continue
         fi 
+        if [ "$IP_Version" = 4 ] && [ "$GOOGLE_IPV6" = on ]; then
+            continue
+        elif [ "$IP_Version" = 6 ] && [ "$GOOGLE_IPV6" = off ]; then
+            continue
+        fi
+
         IP_old=$(dig "${GOOGLE_DOMAIN[i]}" "$DNS_Record" +short)  # ドメインのアドレスを読み込む
 
         if [[ $IP_New != "$IP_old" ]]; then
@@ -79,11 +85,7 @@ multi_ddns_check() {
 
     # GoogleのDDNSサービスはIPv4とIPv6が排他制御のための処理
     if [ ${#GOOGLE_ID[@]} != 0 ]; then
-        if [ "$IP_Version" = 4 ] && [ "$GOOGLE_IPV6" = off ]; then
-            multi_domain_google_check "$MyIP"
-        elif [ "$IP_Version" = 6 ] && [ "$GOOGLE_IPV6" = on ]; then
-            multi_domain_google_check "$MyIP"
-        fi
+        multi_domain_google_check "$MyIP"
     fi
 }
 
