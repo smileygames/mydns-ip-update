@@ -1,20 +1,21 @@
 # mydns-ip-update (IPv6 & マルチドメイン対応)
 
-mydnsにipを自動でupdateするシェルスクリプト
-
 MyDNS®JP → https://www.mydns.jp/
 
 オブジェクト指向化しました。（独自解釈）→ https://smgjp.com/mydns-ip-update_object/
 
 <br>
 
-DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ、
-
-動的IPアドレス変更時に素早く通知させる為の趣味で作った自動通知スクリプトです。
-
-動作に関しては、簡易デバッグテストしかしてないので、ご了承ください。
+## 概要
+- このスクリプトは、MyDNSへの自動通知を目的としています。
+- 使用する環境はAlmaLinuxで、言語はBashです。
+- スクリプトは複数のファイルで構成されており、それぞれの役割や目的があります。
+- `config`ディレクトリ内の設定ファイルに基づいて動作します。
+- IPアドレスの更新やチェックを定期的に行います。
 
 <br>
+
+動作に関しては、簡易デバッグテストしかしてないので、ご了承ください。
 
 固定IPの場合、confファイルでIPV4_DDNS及びIPV6_DDNSを「off」にしておいてください。（余計な処理をしなくなる）
 
@@ -23,7 +24,7 @@ DDNSサービスであるMyDNSサーバーへの負荷を極力減らしつつ�
 ## ワンクリックインストールスクリプト
 ### インストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.07/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.08/install.sh )
 ```
 
 <br>
@@ -61,7 +62,7 @@ sudo systemctl enable mydns-ip-update.service --now
 ### アンインストールスクリプト
 ▼アンインストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.07/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.08/uninstall.sh )
 ```
 
 <br>
@@ -79,7 +80,7 @@ sudo systemctl restart mydns-ip-update.service
 ### ダウンロード及び権限の変更
 
 ```bash
-Ver="2.07"
+Ver="2.08"
 wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
 sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
 sudo cp -rv mydns-ip-update /usr/local/
@@ -105,11 +106,11 @@ ExecStart=/usr/local/mydns-ip-update/bin/ip_update.sh
 WantedBy=network-online.target
 ```
 
-### デーモンリロードをして追加したサービスを読み込ませる
+### デーモンリロードをして追加したサービスを読み込ませて起動させる
 ```bash
 sudo systemctl daemon-reload
+sudo systemctl enable mydns-ip-update.service --now
 ```
-
 <br>
 
 ## スクリプト構成
