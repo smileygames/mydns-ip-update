@@ -8,9 +8,10 @@ Mode=$1
 Array_Num=$2
 Access_URL=$3
 
+Out_Time=25s
+Max_Time=21
+
 mydns_accsse() {
-    Out_Time=25s
-    Max_Time=21
     # DDNSへアクセスするがIDやパスワードがおかしい場合、対話式モードになってスタックするのでタイムアウト処理を入れている
     timeout ${Out_Time} curl --max-time ${Max_Time} -sSu ${Access_URL}
     if [ $? != 0 ]; then 
@@ -19,8 +20,6 @@ mydns_accsse() {
 }
 
 google_accsse() {
-    Out_Time=25s
-    Max_Time=21
     # DDNSへアクセスするがIDやパスワードがおかしい場合、対話式モードになってスタックするのでタイムアウト処理を入れている
     timeout ${Out_Time} curl --max-time ${Max_Time} -sSu ${Access_URL}
     if [ $? != 0 ]; then 

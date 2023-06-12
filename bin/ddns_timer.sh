@@ -17,10 +17,10 @@ Mode=$1
 # IPv4とIPv6でアクセスURLを変える
 ip_update() {
     if [ "$IPV4" = on ]; then
-        . ./ddns_timer/multi_domain.sh "update"
+        . ./ddns_timer/multi_domain.sh "update" "4"
     fi
     if [ "$IPV6" = on ]; then
-        . ./ddns_timer/multi_domain.sh "update"
+        . ./ddns_timer/multi_domain.sh "update" "6"
     fi
 }
 
