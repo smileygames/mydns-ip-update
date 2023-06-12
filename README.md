@@ -4,6 +4,8 @@ MyDNS®JP → https://www.mydns.jp/
 
 オブジェクト指向化しました。（独自解釈）→ https://smgjp.com/mydns-ip-update_object/
 
+マルチDDNSに対応しました → https://github.com/smileygames/dipper
+
 <br>
 
 ## 概要
