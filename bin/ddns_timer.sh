@@ -39,8 +39,7 @@ ip_check() {
 # タイマー処理
 case ${Mode} in
    "update")
-#        sleep 5m;ip_update  # 起動から少し待って最初の処理を行う
-        sleep 10;ip_update  # 起動から少し待って最初の処理を行う
+        sleep 5m;ip_update  # 起動から少し待って最初の処理を行う
         while true;do
             sleep "$UPDATE_TIME";ip_update
         done
