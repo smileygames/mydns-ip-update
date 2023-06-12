@@ -1,4 +1,6 @@
-# mydns-ip-update (IPv6 & マルチドメイン対応)
+# dipper -ddns ip upper- (IPv6 & マルチドメイン対応)
+
+旧名称：mydns-ip-update
 
 MyDNS®JP → https://www.mydns.jp/
 
@@ -7,7 +9,7 @@ MyDNS®JP → https://www.mydns.jp/
 <br>
 
 ## 概要
-- このスクリプトは、MyDNSへの自動通知を目的としています。
+- このスクリプトは、DDNSへの自動通知を目的としています。
 - 使用する環境はAlmaLinuxで、言語はBashです。
 - スクリプトは複数のファイルで構成されており、それぞれの役割や目的があります。
 - `config`ディレクトリ内の設定ファイルに基づいて動作します。
@@ -24,7 +26,7 @@ MyDNS®JP → https://www.mydns.jp/
 ## ワンクリックインストールスクリプト
 ### インストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.08/install.sh )
+bash <( curl -fsSL https://github.com/smileygames/dipper/releases/download/v2.10/install.sh )
 ```
 
 <br>
@@ -35,8 +37,8 @@ installのたびにコンフィグファイルが初期値に戻ってしまう�
 ユーザー側でコンフィグファイルを作成してもらい、上書きインストールでも変更しないようにしました。
 但し、uninstallコマンドを実行すると消えます。
 ```bash
-sudo cp -v /usr/local/mydns-ip-update/config/default.conf /usr/local/mydns-ip-update/config/user.conf
-sudo vim /usr/local/mydns-ip-update/config/user.conf
+sudo cp -v /usr/local/dipper/config/default.conf /usr/local/dipper/config/user.conf
+sudo vim /usr/local/dipper/config/user.conf
 ```
 ```bash
 MYDNS_ID[1]=""
@@ -47,7 +49,7 @@ MYDNS_DOMAIN[1]=""
 
 編集が終わったら権限を変更しておきます。（IDとPASSを管理したファイルの為）
 ```bash
-sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
+sudo chmod 600 /usr/local/dipper/config/user.conf
 ```
 
 <br>
@@ -55,14 +57,14 @@ sudo chmod 600 /usr/local/mydns-ip-update/config/user.conf
 ▼次にサービスの起動です。
 
 ```bash
-sudo systemctl enable mydns-ip-update.service --now
+sudo systemctl enable dipper.service --now
 ```
 <br>
 
 ### アンインストールスクリプト
 ▼アンインストールコマンド
 ```bash
-bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/download/v2.08/uninstall.sh )
+bash <( curl -fsSL https://github.com/smileygames/dipper/releases/download/v2.10/uninstall.sh )
 ```
 
 <br>
@@ -71,7 +73,7 @@ bash <( curl -fsSL https://github.com/smileygames/mydns-ip-update/releases/downl
 コンフィグファイルの内容を変更した際は、
 サービスを再起動しないと反映されないので注意です。
 ```bash
-sudo systemctl restart mydns-ip-update.service
+sudo systemctl restart dipper.service
 ```
 <br>
 
@@ -80,27 +82,27 @@ sudo systemctl restart mydns-ip-update.service
 ### ダウンロード及び権限の変更
 
 ```bash
-Ver="2.08"
-wget https://github.com/smileygames/mydns-ip-update/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
-sudo mv -fv mydns-ip-update-${Ver} mydns-ip-update
-sudo cp -rv mydns-ip-update /usr/local/
-sudo rm -rf mydns-ip-update
-sudo chmod -R 755 /usr/local/mydns-ip-update/bin
+Ver="2.10"
+wget https://github.com/smileygames/dipper/archive/refs/tags/v${Ver}.tar.gz -O - | sudo tar zxvf - -C ./
+sudo mv -fv dipper-${Ver} dipper
+sudo cp -rv dipper /usr/local/
+sudo rm -rf dipper
+sudo chmod -R 755 /usr/local/dipper/bin
 ```
 
 ### サービス作成
 ```bash
-sudo vi /etc/systemd/system/mydns-ip-update.service
+sudo vi /etc/systemd/system/dipper.service
 ```
 ```bash
 [Unit]
-Description=mydns-ip-update
+Description=ddns-ip-upper
 
 [Service]
 Type=simple
 Restart=on-failure
-WorkingDirectory=/usr/local/mydns-ip-update/bin
-ExecStart=/usr/local/mydns-ip-update/bin/ip_update.sh
+WorkingDirectory=/usr/local/dipper/bin
+ExecStart=/usr/local/dipper/bin/ip_update.sh
 
 [Install]
 WantedBy=network-online.target
@@ -109,7 +111,7 @@ WantedBy=network-online.target
 ### デーモンリロードをして追加したサービスを読み込ませて起動させる
 ```bash
 sudo systemctl daemon-reload
-sudo systemctl enable mydns-ip-update.service --now
+sudo systemctl enable dipper.service --now
 ```
 <br>
 
