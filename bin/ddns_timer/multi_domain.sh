@@ -27,9 +27,9 @@ multi_domain_mydns_check() {
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "MYDNS_ID[$i] or MYDNS_PASS[$i] or MYDNS_DOMAIN[$i]"
             continue
         fi 
-        IP_old=$(dig "${MYDNS_DOMAIN[i]}" "$DNS_Record" +short)  # ドメインのアドレスを読み込む
+        IP_old=$(dig "${MYDNS_DOMAIN[$i]}" "$DNS_Record" +short)  # ドメインのアドレスを読み込む
 
-        if [[ $IP_New != "$IP_old" ]]; then
+        if [[ "$IP_New" != "$IP_old" ]]; then
             ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
          fi
     done
