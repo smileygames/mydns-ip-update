@@ -5,37 +5,20 @@
 # shellcheck disable=SC2086
 
 Mode=$1
-Array_Num=$2
-Access_URL=$3
+Func_Name=$2
+Array_Num=$3
+Access_URL=$4
 
 Out_Time=25s
 Max_Time=21
 
-mydns_accsse() {
+accsse() {
     # DDNSへアクセスするがIDやパスワードがおかしい場合、対話式モードになってスタックするのでタイムアウト処理を入れている
     timeout ${Out_Time} curl --max-time ${Max_Time} -sSu ${Access_URL}
     if [ $? != 0 ]; then 
-        ./err_message.sh "timeout" "${FUNCNAME[0]}" "${Out_Time}: ログイン情報 curl -u MYDNS_ID[$Array_Num]:MYDNS_PASS[$Array_Num] URL"
-    fi
-}
-
-google_accsse() {
-    # DDNSへアクセスするがIDやパスワードがおかしい場合、対話式モードになってスタックするのでタイムアウト処理を入れている
-    timeout ${Out_Time} curl --max-time ${Max_Time} -sSu ${Access_URL}
-    if [ $? != 0 ]; then 
-        ./err_message.sh "timeout" "${FUNCNAME[0]}" "${Out_Time}: ログイン情報 curl -u GOOGLE_ID[$Array_Num]:GOOGLE_PASS[$Array_Num] URL"
+        ./err_message.sh "timeout" "${Func_Name}" "${Out_Time}: ログイン情報 curl -u ${Mode}_ID[$Array_Num]:${Mode}_PASS[$Array_Num] URL"
     fi
 }
 
 # 実行スクリプト
-case ${Mode} in
-   "mydns")
-        mydns_accsse
-        ;;
-   "google")
-        google_accsse
-        ;;
-    * )
-        echo "[${Mode}] <- 引数エラーです"
-    ;; 
-esac
+accsse

@@ -8,33 +8,31 @@ Mode=$1
 IP_Version=$2
 DNS_Record=$3
 
-# 配列のデータを読み込んでDDNSへアクセス
-multi_domain_ip_update() {
+ip_url_set() {
     if [ "$IP_Version" = 4 ]; then
         Login_URL=${MYDNS_IPV4_URL}
     elif [ "$IP_Version" = 6 ]; then
         Login_URL=${MYDNS_IPV6_URL}
     fi
+}
 
+# 配列のデータを読み込んでDDNSへアクセス
+multi_domain_ip_update() {
+    ip_url_set
     for i in "${!MYDNS_ID[@]}"; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]]; then
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "MYDNS_ID[$i] or MYDNS_PASS[$i]"
             continue
         fi
-        ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
+        ./dns_access.sh "MYDNS" "${FUNCNAME[0]}" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
     done
 }
 
 # 配列のデータを読み込んでアドレスをチェックし変更があった場合のみ、DDNSへアクセス
-multi_domain_mydns_check() {
+mydns_multi_domain_check() {
     IP_New=$1
 
-    if [ "$IP_Version" = 4 ]; then
-        Login_URL=${MYDNS_IPV4_URL}
-    elif [ "$IP_Version" = 6 ]; then
-        Login_URL=${MYDNS_IPV6_URL}
-    fi
-
+    ip_url_set
     for i in "${!MYDNS_ID[@]}"; do
         if [[ ${MYDNS_ID[$i]} = "" ]] || [[ ${MYDNS_PASS[$i]} = "" ]] || [[ ${MYDNS_DOMAIN[$i]} = "" ]]; then
             ./err_message.sh "no_value" "${FUNCNAME[0]}" "MYDNS_ID[$i] or MYDNS_PASS[$i] or MYDNS_DOMAIN[$i]"
@@ -43,13 +41,13 @@ multi_domain_mydns_check() {
         IP_old=$(dig "${MYDNS_DOMAIN[$i]}" "$DNS_Record" +short)  # ドメインのアドレスを読み込む
 
         if [[ "$IP_New" != "$IP_old" ]]; then
-            ./dns_access.sh "mydns" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
+            ./dns_access.sh "MYDNS" "${FUNCNAME[0]}" "$i" "${MYDNS_ID[$i]}:${MYDNS_PASS[$i]} ${Login_URL}"
          fi
     done
 }
 
 # Googleの場合用のDDNSアクセス
-multi_domain_google_check() {
+google_multi_domain_check() {
     IP_New=$1
 
     for i in "${!GOOGLE_ID[@]}"; do
@@ -62,11 +60,10 @@ multi_domain_google_check() {
         elif [ "$IP_Version" = 6 ] && [[ ${GOOGLE_IPV6[$i]} = off ]]; then
             continue
         fi
-
         IP_old=$(dig "${GOOGLE_DOMAIN[$i]}" "$DNS_Record" +short)  # ドメインのアドレスを読み込む
 
         if [[ "$IP_New" != "$IP_old" ]]; then
-            ./dns_access.sh "google" "$i" "${GOOGLE_ID[$i]}:${GOOGLE_PASS[$i]} ${GOOGLE_URL}?hostname=${GOOGLE_DOMAIN[$i]}&myip=${IP_New}"
+            ./dns_access.sh "GOOGLE" "${FUNCNAME[0]}" "$i" "${GOOGLE_ID[$i]}:${GOOGLE_PASS[$i]} ${GOOGLE_URL}?hostname=${GOOGLE_DOMAIN[$i]}&myip=${IP_New}"
         fi
     done
 }
@@ -80,12 +77,12 @@ multi_ddns_check() {
     fi
 
     if [ ${#MYDNS_ID[@]} != 0 ]; then
-        multi_domain_mydns_check "$MyIP" &
+        mydns_multi_domain_check "$MyIP" &
     fi
 
     # GoogleのDDNSサービスはIPv4とIPv6が排他制御のための処理
     if [ ${#GOOGLE_ID[@]} != 0 ]; then
-        multi_domain_google_check "$MyIP" &
+        google_multi_domain_check "$MyIP" &
     fi
 }
 
