@@ -1,4 +1,4 @@
-# dipper -ddns ip upper- (IPv6 & マルチドメイン対応)
+# dipper -ddns ip upper- (multi DDNS & IPv6 & multi domain対応)
 
 旧名称：mydns-ip-update
 
